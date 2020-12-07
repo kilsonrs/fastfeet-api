@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import CreateDeliveryService from '../services/CreateDeliveryService';
+import DeleteDeliveryService from '../services/DeleteDeliveryService';
 import ListDeliveryService from '../services/ListDeliveryService';
 import UpdateDeliveryService from '../services/UpdateDeliveryService';
 
@@ -63,6 +64,13 @@ deliveriesRouter.put('/:delivery_id', async (request, response) => {
     state,
   });
   return response.json(delivery);
+});
+
+deliveriesRouter.delete('/:delivery_id', async (request, response) => {
+  const deleteDelivery = new DeleteDeliveryService();
+  const { delivery_id } = request.params;
+  await deleteDelivery.execute(delivery_id);
+  return response.status(200).send();
 });
 
 export default deliveriesRouter;
