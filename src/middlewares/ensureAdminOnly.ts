@@ -11,8 +11,8 @@ async function ensureAdminOnly(
   const getUsers = getRepository(User);
   const userId = request.user.id;
   const user = await getUsers.findOne(userId);
-  if (user?.deliveryman) {
-    throw new AppError('You are not allowed to do this.');
+  if (!user || user.deliveryman) {
+    throw new AppError('User not found or without permission to access.');
   }
   return next();
 }
