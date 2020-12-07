@@ -1,9 +1,9 @@
 import { getRepository } from 'typeorm';
-import Deliveries from '../models/Deliveries';
+import Delivery from '../models/Delivery';
 
 class ListDeliveryService {
-  public async execute(): Promise<Deliveries[]> {
-    const getDelivery = getRepository(Deliveries);
+  public async execute(): Promise<Delivery[]> {
+    const getDelivery = getRepository(Delivery);
 
     const deliveries = getDelivery.find();
 
