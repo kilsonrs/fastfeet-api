@@ -4,7 +4,10 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
+import User from './User';
 
 @Entity('deliveries')
 class Delivery {
@@ -13,6 +16,12 @@ class Delivery {
 
   @Column()
   deliveryman_id: string;
+
+  @ManyToOne(() => User, {
+    eager: true,
+  })
+  @JoinColumn({ name: 'deliveryman_id' })
+  deliveryman: User;
 
   @Column()
   recipient: string;
