@@ -20,6 +20,11 @@ export default class CreateDeliveries1607085994541
             isNullable: false,
           },
           {
+            name: 'recipient',
+            type: 'varchar',
+            isNullable: false,
+          },
+          {
             name: 'product',
             type: 'varchar',
             isNullable: false,

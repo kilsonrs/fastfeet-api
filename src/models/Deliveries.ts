@@ -15,6 +15,9 @@ class Deliveries {
   deliveryman_id: string;
 
   @Column()
+  recipient: string;
+
+  @Column()
   product: string;
 
   @Column()

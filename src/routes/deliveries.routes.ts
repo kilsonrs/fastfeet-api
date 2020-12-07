@@ -1,12 +1,14 @@
 import { Router } from 'express';
 import CreateDeliveryService from '../services/CreateDeliveryService';
+import ListDeliveryService from '../services/ListDeliveryService';
 
 const deliveriesRouter = Router();
 
 deliveriesRouter.post('/', async (request, response) => {
   const createDelivery = new CreateDeliveryService();
-  const { user } = request;
   const {
+    deliveryman_id,
+    recipient,
     product,
     address,
     postal_code,
@@ -16,7 +18,8 @@ deliveriesRouter.post('/', async (request, response) => {
   } = request.body;
 
   const delivery = await createDelivery.execute({
-    deliveryman_id: user.id,
+    deliveryman_id,
+    recipient,
     product,
     address,
     postal_code,
@@ -27,4 +30,9 @@ deliveriesRouter.post('/', async (request, response) => {
   return response.json(delivery);
 });
 
+deliveriesRouter.get('/', async (request, response) => {
+  const listDeliveries = new ListDeliveryService();
+  const deliveries = await listDeliveries.execute();
+  return response.json(deliveries);
+});
 export default deliveriesRouter;

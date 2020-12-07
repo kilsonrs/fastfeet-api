@@ -3,6 +3,7 @@ import Delivery from '../models/Deliveries';
 
 interface Request {
   deliveryman_id: string;
+  recipient: string;
   product: string;
   address: string;
   postal_code: string;
@@ -14,6 +15,7 @@ interface Request {
 class CreateDeliveryService {
   public async execute({
     deliveryman_id,
+    recipient,
     product,
     address,
     postal_code,
@@ -24,6 +26,7 @@ class CreateDeliveryService {
     const deliveryRepository = getRepository(Delivery);
     const newDelivery = {
       deliveryman_id,
+      recipient,
       product,
       address,
       postal_code,
