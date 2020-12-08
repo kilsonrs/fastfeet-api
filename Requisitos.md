@@ -28,10 +28,10 @@
 
 /users
 /sessions
+/deliveries
 
 /deliveryman/sessions
-
-/deliveryman/deliveries
+/deliveryman/:deliveryman_id/deliveries
 
 - pendentes
 - feitas (por ele)

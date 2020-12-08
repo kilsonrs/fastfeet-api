@@ -5,7 +5,7 @@ class ListDeliveryService {
   public async execute(): Promise<Delivery[]> {
     const getDelivery = getRepository(Delivery);
 
-    const deliveries = getDelivery.find();
+    const deliveries = await getDelivery.find();
 
     return deliveries;
   }
