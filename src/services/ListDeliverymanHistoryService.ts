@@ -6,7 +6,7 @@ interface Request {
   neighborhood?: string;
 }
 
-class ListDeliverymanDeliveryService {
+class ListDeliverymanHistoryService {
   public async execute({
     deliveryman_id,
     neighborhood,
@@ -16,8 +16,7 @@ class ListDeliverymanDeliveryService {
     const deliveries = await getDelivery.find({
       where: {
         deliveryman_id,
-        canceled_at: IsNull(),
-        end_date: IsNull(),
+        end_date: Not(IsNull()),
         neighborhood: neighborhood ? Like(`%${neighborhood}%`) : Not(IsNull()),
       },
     });
@@ -26,4 +25,4 @@ class ListDeliverymanDeliveryService {
   }
 }
 
-export default ListDeliverymanDeliveryService;
+export default ListDeliverymanHistoryService;

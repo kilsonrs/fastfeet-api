@@ -1,21 +1,13 @@
-import { Request, Response, Router } from 'express';
-import Delivery from '../models/Delivery';
-import ListDeliverymanDeliveryService from '../services/ListDeliverymanDeliveryService';
+import { Router } from 'express';
+import DeliverymanDeliveriesController from '../controllers/DeliverymanDeliveriesController';
+import DeliverymanHistoryController from '../controllers/DeliverymanHistoryController';
 
 const deliverymanRouter = Router();
+const deliverymanDeliveriesController = new DeliverymanDeliveriesController();
+const deliverymanHistoryController = new DeliverymanHistoryController();
 
-deliverymanRouter.get(
-  '/:deliveryman_id/deliveries',
-  async (request: Request, response: Response): Promise<Delivery[]> => {
-    const { deliveryman_id } = request.params;
-    const listDeliverymanDelivery = new ListDeliverymanDeliveryService();
+deliverymanRouter.get('/deliveries', deliverymanDeliveriesController.index);
 
-    const deliveries = await listDeliverymanDelivery.execute({
-      deliveryman_id,
-    });
-
-    return response.json(deliveries);
-  },
-);
+deliverymanRouter.get('/history', deliverymanHistoryController.index);
 
 export default deliverymanRouter;
