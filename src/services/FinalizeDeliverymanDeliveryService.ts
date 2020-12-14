@@ -22,8 +22,12 @@ class FinalizeDeliverymanDeliveryService {
     }
     if (delivery.deliveryman_id !== deliveryman_id) {
       throw new AppError(
-        'You cannot complete delivery from another deliveryman.',
+        'You cannot finalize delivery from another deliveryman.',
       );
+    }
+
+    if (delivery.end_date) {
+      throw new AppError('You cannot finalize the delivery already delivered.');
     }
 
     delivery.end_date = parseISO(end_date);

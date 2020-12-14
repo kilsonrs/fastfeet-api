@@ -39,7 +39,7 @@ class Delivery {
   @Column()
   city: string;
 
-  @Column('time with time zone')
+  @Column()
   state: string;
 
   @Column('time with time zone')
@@ -48,10 +48,10 @@ class Delivery {
   @Column()
   signature_id: string;
 
-  @Column('time with time zone')
+  @Column('timestamp without time zone')
   start_date: Date;
 
-  @Column('time with time zone')
+  @Column('timestamp without time zone')
   end_date: Date;
 
   @CreateDateColumn()
