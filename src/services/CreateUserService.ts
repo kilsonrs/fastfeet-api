@@ -40,8 +40,6 @@ class CreateUserService {
     });
     await userRepository.save(user);
 
-    delete user.password;
-
     return user;
   }
 }
