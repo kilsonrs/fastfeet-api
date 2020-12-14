@@ -4,9 +4,11 @@ import 'express-async-errors';
 import Routes from './routes';
 import './database';
 import AppError from './errors/AppError';
+import uploadConfig from './config/upload';
 
 const app = express();
 app.use(express.json());
+app.use('/files', express.static(uploadConfig.uploadFolder));
 app.use(Routes);
 
 app.use((err: Error, request: Request, response: Response, _: NextFunction) => {

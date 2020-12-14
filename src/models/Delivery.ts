@@ -7,6 +7,7 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
+import { Expose } from 'class-transformer';
 import User from './User';
 
 @Entity('deliveries')
@@ -59,6 +60,14 @@ class Delivery {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @Expose({ name: 'signature_url' })
+  getSignatureUrl(): string | null {
+    if (!this.signature_id) {
+      return null;
+    }
+    return `${process.env.APP_API_URL}/files/${this.signature_id}`;
+  }
 }
 
 export default Delivery;

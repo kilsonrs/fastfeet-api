@@ -1,4 +1,6 @@
 import { Request, Response } from 'express';
+import { classToClass } from 'class-transformer';
+
 import ListDeliveryService from '../services/ListDeliveryService';
 import CreateDeliveryService from '../services/CreateDeliveryService';
 import UpdateDeliveryService from '../services/UpdateDeliveryService';
@@ -8,7 +10,7 @@ class DeliveryController {
   public async index(request: Request, response: Response): Promise<Response> {
     const listDeliveries = new ListDeliveryService();
     const deliveries = await listDeliveries.execute();
-    return response.json(deliveries);
+    return response.json(classToClass(deliveries));
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
