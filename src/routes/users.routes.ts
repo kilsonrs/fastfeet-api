@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { classToClass } from 'class-transformer';
 import CreateUserService from '../services/CreateUserService';
 
 const usersRouter = Router();
@@ -13,7 +14,7 @@ usersRouter.post('/', async (request, response) => {
     cpf,
     deliveryman,
   });
-  return response.json(user);
+  return response.json(classToClass(user));
 });
 
 export default usersRouter;

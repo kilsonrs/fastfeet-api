@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { classToClass } from 'class-transformer';
 import ListDeliverymanHistoryService from '../services/ListDeliverymanHistoryService';
 
 type Neighborhood = {
@@ -15,8 +16,7 @@ class DeliverymanHistoryController {
       deliveryman_id,
       neighborhood,
     });
-
-    return response.json(deliveries);
+    return response.json(classToClass(deliveries));
   }
 }
 export default DeliverymanHistoryController;

@@ -1,4 +1,6 @@
 import { Request, Response } from 'express';
+import { classToClass } from 'class-transformer';
+
 import UpdateSignatureDeliveryService from '../services/UpdateSignatureDeliveryService';
 
 class SignatureDeliveryController {
@@ -12,7 +14,7 @@ class SignatureDeliveryController {
       delivery_id,
       signatureFilename,
     });
-    return response.json(delivery);
+    return response.json(classToClass(delivery));
   }
 }
 
