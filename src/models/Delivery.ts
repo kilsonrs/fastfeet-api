@@ -17,9 +17,7 @@ class Delivery {
   @Column()
   deliveryman_id: string;
 
-  @ManyToOne(() => User, {
-    eager: true,
-  })
+  @ManyToOne(() => User)
   @JoinColumn({ name: 'deliveryman_id' })
   deliveryman: User;
 
@@ -51,16 +49,16 @@ class Delivery {
   signature_id: string;
 
   @Column('time with time zone')
-  start_date: string;
+  start_date: Date;
 
   @Column('time with time zone')
-  end_date: string;
+  end_date: Date;
 
   @CreateDateColumn()
-  created_at: string;
+  created_at: Date;
 
   @UpdateDateColumn()
-  updated_at: string;
+  updated_at: Date;
 }
 
 export default Delivery;

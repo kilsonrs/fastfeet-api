@@ -66,12 +66,12 @@ export default class CreateDeliveries1607085994541
           },
           {
             name: 'start_date',
-            type: 'timestamp',
+            type: 'timestamp with time zone',
             isNullable: true,
           },
           {
             name: 'end_date',
-            type: 'timestamp',
+            type: 'timestamp with time zone',
             isNullable: true,
           },
           {
