@@ -28,12 +28,11 @@ class UpdateSignatureDeliveryService {
     const storageProvider = new DiskStorageProvider();
 
     if (delivery.signature_id) {
-      await storageProvider.deleteFile(signatureFilename);
+      await storageProvider.deleteFile(delivery.signature_id);
     }
 
     const filename = await storageProvider.saveFile(signatureFilename);
 
-    console.log(filename);
     delivery.signature_id = filename;
 
     await updateDelivery.save(delivery);
