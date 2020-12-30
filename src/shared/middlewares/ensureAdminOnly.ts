@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { getRepository } from 'typeorm';
 import { AppError } from '../errors/AppError';
-import { User } from '../entities/User';
+import { User } from '../../entities/User';
 
 async function ensureAdminOnly(
   request: Request,

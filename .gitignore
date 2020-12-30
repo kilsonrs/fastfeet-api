@@ -4,4 +4,4 @@ node_modules
 !tmp/.gitkeep
 .env
 ormconfig.json
-requirements
+.vscode
