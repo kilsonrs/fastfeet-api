@@ -1,7 +1,7 @@
 import { getRepository } from 'typeorm';
 import { parseISO } from 'date-fns';
-import AppError from '../errors/AppError';
-import Delivery from '../models/Delivery';
+import { AppError } from '../errors/AppError';
+import { Delivery } from '../entities/Delivery';
 
 interface Request {
   deliveryman_id: string;
@@ -38,4 +38,4 @@ class FinalizeDeliverymanDeliveryService {
   }
 }
 
-export default FinalizeDeliverymanDeliveryService;
+export { FinalizeDeliverymanDeliveryService };

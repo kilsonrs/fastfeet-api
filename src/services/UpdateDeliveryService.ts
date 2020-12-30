@@ -1,6 +1,6 @@
 import { getRepository } from 'typeorm';
-import AppError from '../errors/AppError';
-import Delivery from '../models/Delivery';
+import { AppError } from '../errors/AppError';
+import { Delivery } from '../entities/Delivery';
 
 interface Request {
   delivery_id: string;
@@ -47,4 +47,4 @@ class UpdateDeliveryService {
   }
 }
 
-export default UpdateDeliveryService;
+export { UpdateDeliveryService };

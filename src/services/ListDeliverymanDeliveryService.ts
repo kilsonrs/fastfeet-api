@@ -1,5 +1,5 @@
 import { getRepository, IsNull, Like, Not } from 'typeorm';
-import Delivery from '../models/Delivery';
+import { Delivery } from '../entities/Delivery';
 
 interface Request {
   deliveryman_id: string;
@@ -26,4 +26,4 @@ class ListDeliverymanDeliveryService {
   }
 }
 
-export default ListDeliverymanDeliveryService;
+export { ListDeliverymanDeliveryService };

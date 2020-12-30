@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
 import { classToClass } from 'class-transformer';
 
-import ListDeliveryService from '../services/ListDeliveryService';
-import CreateDeliveryService from '../services/CreateDeliveryService';
-import UpdateDeliveryService from '../services/UpdateDeliveryService';
-import DeleteDeliveryService from '../services/DeleteDeliveryService';
+import { ListDeliveryService } from '../services/ListDeliveryService';
+import { CreateDeliveryService } from '../services/CreateDeliveryService';
+import { UpdateDeliveryService } from '../services/UpdateDeliveryService';
+import { DeleteDeliveryService } from '../services/DeleteDeliveryService';
 
 class DeliveryController {
   public async index(request: Request, response: Response): Promise<Response> {
@@ -75,4 +75,4 @@ class DeliveryController {
   }
 }
 
-export default DeliveryController;
+export { DeliveryController };

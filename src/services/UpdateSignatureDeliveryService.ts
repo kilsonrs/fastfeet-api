@@ -1,7 +1,7 @@
 import { getRepository } from 'typeorm';
-import AppError from '../errors/AppError';
-import Delivery from '../models/Delivery';
-import DiskStorageProvider from '../providers/DiskStorageProvider';
+import { AppError } from '../errors/AppError';
+import { Delivery } from '../entities/Delivery';
+import { DiskStorageProvider } from '../providers/DiskStorageProvider';
 
 interface IRequest {
   deliveryman_id: string;
@@ -41,4 +41,4 @@ class UpdateSignatureDeliveryService {
   }
 }
 
-export default UpdateSignatureDeliveryService;
+export { UpdateSignatureDeliveryService };

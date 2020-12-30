@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import ListDeliverymanDeliveryService from '../services/ListDeliverymanDeliveryService';
+import { ListDeliverymanDeliveryService } from '../services/ListDeliverymanDeliveryService';
 
 type Neighborhood = {
   neighborhood: string;
@@ -21,4 +21,4 @@ class DeliverymanDeliveriesController {
   }
 }
 
-export default DeliverymanDeliveriesController;
+export { DeliverymanDeliveriesController };

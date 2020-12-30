@@ -8,7 +8,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { Expose } from 'class-transformer';
-import User from './User';
+import { User } from './User';
 
 @Entity('deliveries')
 class Delivery {
@@ -70,4 +70,4 @@ class Delivery {
   }
 }
 
-export default Delivery;
+export { Delivery };

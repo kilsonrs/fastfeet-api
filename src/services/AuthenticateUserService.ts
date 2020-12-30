@@ -3,8 +3,8 @@ import { getRepository } from 'typeorm';
 import { sign } from 'jsonwebtoken';
 
 import authConfig from '../config/auth';
-import AppError from '../errors/AppError';
-import User from '../models/User';
+import { AppError } from '../errors/AppError';
+import { User } from '../entities/User';
 
 interface Request {
   cpf?: string;

@@ -1,5 +1,5 @@
 import { getRepository } from 'typeorm';
-import Delivery from '../models/Delivery';
+import { Delivery } from '../entities/Delivery';
 
 class ListDeliveryService {
   public async execute(): Promise<Delivery[]> {
@@ -11,4 +11,4 @@ class ListDeliveryService {
   }
 }
 
-export default ListDeliveryService;
+export { ListDeliveryService };

@@ -1,6 +1,6 @@
 import { getRepository } from 'typeorm';
-import AppError from '../errors/AppError';
-import Delivery from '../models/Delivery';
+import { AppError } from '../errors/AppError';
+import { Delivery } from '../entities/Delivery';
 
 class DeleteDeliveryService {
   public async execute(delivery_id: string): Promise<void> {
@@ -14,4 +14,4 @@ class DeleteDeliveryService {
   }
 }
 
-export default DeleteDeliveryService;
+export { DeleteDeliveryService };

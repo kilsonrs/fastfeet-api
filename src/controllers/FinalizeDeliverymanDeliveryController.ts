@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import FinalizeDeliverymanDeliveryService from '../services/FinalizeDeliverymanDeliveryService';
+import { FinalizeDeliverymanDeliveryService } from '../services/FinalizeDeliverymanDeliveryService';
 
 class FinalizeDeliverymanDeliveryController {
   public async update(request: Request, response: Response): Promise<Response> {
@@ -16,4 +16,4 @@ class FinalizeDeliverymanDeliveryController {
   }
 }
 
-export default FinalizeDeliverymanDeliveryController;
+export { FinalizeDeliverymanDeliveryController };

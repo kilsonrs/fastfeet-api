@@ -1,12 +1,12 @@
 import { Router } from 'express';
 import multer from 'multer';
-import uploadConfig from '../config/upload';
+import { uploadConfig } from '../config/upload';
 
-import DeliverymanDeliveriesController from '../controllers/DeliverymanDeliveriesController';
-import DeliverymanHistoryController from '../controllers/DeliverymanHistoryController';
-import PickDeliverymanDeliveryController from '../controllers/PickDeliverymanDeliveryController';
-import FinalizeDeliverymanDeliveryController from '../controllers/FinalizeDeliverymanDeliveryController';
-import SignatureDeliveryController from '../controllers/SignatureDeliveryController';
+import { DeliverymanDeliveriesController } from '../controllers/DeliverymanDeliveriesController';
+import { DeliverymanHistoryController } from '../controllers/DeliverymanHistoryController';
+import { PickDeliverymanDeliveryController } from '../controllers/PickDeliverymanDeliveryController';
+import { FinalizeDeliverymanDeliveryController } from '../controllers/FinalizeDeliverymanDeliveryController';
+import { SignatureDeliveryController } from '../controllers/SignatureDeliveryController';
 
 const deliverymanRouter = Router();
 const deliverymanDeliveriesController = new DeliverymanDeliveriesController();
@@ -36,4 +36,4 @@ deliverymanRouter.patch(
   signatureDeliveryController.update,
 );
 
-export default deliverymanRouter;
+export { deliverymanRouter };

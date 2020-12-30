@@ -27,7 +27,7 @@ class User {
   password: string;
 
   @Column()
-  deliveryman: boolean;
+  is_deliveryman: boolean;
 
   @CreateDateColumn()
   created_at: Date;
@@ -36,4 +36,4 @@ class User {
   updated_at: Date;
 }
 
-export default User;
+export { User };

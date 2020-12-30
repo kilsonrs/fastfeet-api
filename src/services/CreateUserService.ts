@@ -1,15 +1,15 @@
 import { getRepository } from 'typeorm';
 import { hash } from 'bcryptjs';
 
-import AppError from '../errors/AppError';
-import User from '../models/User';
+import { AppError } from '../errors/AppError';
+import { User } from '../entities/User';
 
 interface Request {
   name: string;
   email: string;
   password: string;
   cpf: string;
-  deliveryman: boolean;
+  is_deliveryman: boolean;
 }
 
 class CreateUserService {
@@ -18,7 +18,7 @@ class CreateUserService {
     email,
     password,
     cpf,
-    deliveryman,
+    is_deliveryman,
   }: Request): Promise<User> {
     const userRepository = getRepository(User);
     const checkUserExtists = await userRepository.findOne({
@@ -36,7 +36,7 @@ class CreateUserService {
       email,
       password: hashedPassword,
       cpf,
-      deliveryman,
+      is_deliveryman,
     });
     await userRepository.save(user);
 

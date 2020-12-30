@@ -1,14 +1,14 @@
 import { getRepository, Between } from 'typeorm';
 import { startOfDay, endOfDay, isBefore, addHours, isAfter } from 'date-fns';
-import AppError from '../errors/AppError';
-import Delivery from '../models/Delivery';
+import { AppError } from '../errors/AppError';
+import { Delivery } from '../entities/Delivery';
 
 interface Request {
   deliveryman_id: string;
   delivery_id: string;
 }
 
-class UpdateDeliverymanDeliveryService {
+class PickDeliverymanDeliveryService {
   public async execute({
     deliveryman_id,
     delivery_id,
@@ -62,4 +62,4 @@ class UpdateDeliverymanDeliveryService {
   }
 }
 
-export default UpdateDeliverymanDeliveryService;
+export { PickDeliverymanDeliveryService };

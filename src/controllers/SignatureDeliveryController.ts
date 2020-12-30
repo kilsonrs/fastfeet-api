@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { classToClass } from 'class-transformer';
 
-import UpdateSignatureDeliveryService from '../services/UpdateSignatureDeliveryService';
+import { UpdateSignatureDeliveryService } from '../services/UpdateSignatureDeliveryService';
 
 class SignatureDeliveryController {
   public async update(request: Request, response: Response): Promise<Response> {
@@ -18,4 +18,4 @@ class SignatureDeliveryController {
   }
 }
 
-export default SignatureDeliveryController;
+export { SignatureDeliveryController };

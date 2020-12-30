@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { classToClass } from 'class-transformer';
-import ListDeliverymanHistoryService from '../services/ListDeliverymanHistoryService';
+import { ListDeliverymanHistoryService } from '../services/ListDeliverymanHistoryService';
 
 type Neighborhood = {
   neighborhood: string;
@@ -19,4 +19,4 @@ class DeliverymanHistoryController {
     return response.json(classToClass(deliveries));
   }
 }
-export default DeliverymanHistoryController;
+export { DeliverymanHistoryController };

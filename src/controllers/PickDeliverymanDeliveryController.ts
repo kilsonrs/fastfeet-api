@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import PickDeliverymanDeliveryService from '../services/PickDeliverymanDeliveryService';
+import { PickDeliverymanDeliveryService } from '../services/PickDeliverymanDeliveryService';
 
 class PickDeliverymanDeliveryController {
   public async update(request: Request, response: Response): Promise<Response> {
@@ -16,4 +16,4 @@ class PickDeliverymanDeliveryController {
   }
 }
 
-export default PickDeliverymanDeliveryController;
+export { PickDeliverymanDeliveryController };

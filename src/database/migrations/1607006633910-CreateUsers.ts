@@ -31,7 +31,7 @@ export default class CreateUsers1607006633910 implements MigrationInterface {
             type: 'varchar',
           },
           {
-            name: 'deliveryman',
+            name: 'is_deliveryman',
             type: 'bool',
           },
           {
