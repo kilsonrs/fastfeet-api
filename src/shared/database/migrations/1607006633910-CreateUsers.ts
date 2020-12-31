@@ -29,6 +29,7 @@ export default class CreateUsers1607006633910 implements MigrationInterface {
           {
             name: 'cpf',
             type: 'varchar',
+            isUnique: true,
           },
           {
             name: 'is_deliveryman',
