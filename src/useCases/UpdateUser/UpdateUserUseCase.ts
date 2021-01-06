@@ -13,6 +13,9 @@ class UpdateUserUseCase {
       throw new AppError('User not found');
     }
     const user = await this.userRepository.save(data);
+    if (data.password !== data.password_confirmation) {
+      throw new AppError('Password and password confirmation does not match');
+    }
     return user;
   }
 }

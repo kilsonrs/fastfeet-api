@@ -1,4 +1,5 @@
 import FakeUserRepository from '../../repositories/fakes/FakeUserRepository';
+import AppError from '../../shared/errors/AppError';
 import FakeHashProvider from '../../shared/providers/HashProvider/fakes/FakeHashProvider';
 import CreateUserUseCase from '../CreateUser/CreateUserUseCase';
 import UpdateUserUseCase from './UpdateUserUseCase';
@@ -36,5 +37,26 @@ describe('UpdateUser UseCase', () => {
     expect(updatedUser.name).toBe('other_name');
     expect(updatedUser.email).toBe('other_email@mail.com');
     expect(updatedUser.password).toBe('other_password');
+  });
+
+  it('should not be able to update a user if password and password_confirmation does not match', async () => {
+    const user = await createUser.execute({
+      name: 'any_name',
+      cpf: 'any_cpf',
+      email: 'any_email@mail.com',
+      is_deliveryman: false,
+      password: 'any_password',
+      password_confirmation: 'any_password',
+    });
+    await expect(
+      updateUser.execute({
+        id: user.id,
+        name: 'any_name',
+        email: 'any_email@mail.com',
+        is_deliveryman: false,
+        password: 'any_password',
+        password_confirmation: 'other_password',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
   });
 });
