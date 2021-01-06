@@ -20,4 +20,4 @@ const uploadConfig = {
   },
 };
 
-export { uploadConfig }
+export default uploadConfig;

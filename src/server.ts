@@ -6,6 +6,7 @@ import './shared/database';
 import { uploadConfig } from './shared/config/upload';
 
 import { errorMiddleware } from './shared/middlewares/errorMiddleware';
+
 const app = express();
 
 app.use(express.json());

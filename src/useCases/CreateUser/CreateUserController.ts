@@ -1,23 +1,21 @@
-import { Request, Response } from 'express'
-import { CreateUserUseCase } from "./CreateUserUseCase";
+import { Request, Response } from 'express';
+import CreateUserUseCase from './CreateUserUseCase';
 
 class CreateUserController {
-  constructor(private createUserUseCase: CreateUserUseCase) { }
-  async handle(request: Request, response: Response) {
+  constructor(private createUserUseCase: CreateUserUseCase) {}
+
+  async handle(request: Request, response: Response): Promise<Response> {
     try {
-
-      await this.createUserUseCase.execute(request.body)
-      return response.status(201).send()
-
+      await this.createUserUseCase.execute(request.body);
+      return response.status(201).send();
     } catch (err) {
-
-      console.error(err.message)
+      console.error(err.message);
 
       return response.status(err.statusCode).json({
-        message: err.message || "Unexpected Error"
-      })
+        message: err.message || 'Unexpected Error',
+      });
     }
   }
 }
 
-export { CreateUserController }
+export default CreateUserController;

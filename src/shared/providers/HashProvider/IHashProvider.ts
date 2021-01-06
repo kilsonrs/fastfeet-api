@@ -1,3 +1,3 @@
-interface IHashProvider {
-  generateHash(payload: string): Promise<string>
+export default interface IHashProvider {
+  generateHash(payload: string): Promise<string>;
 }

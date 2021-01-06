@@ -1,9 +1,8 @@
-interface ICreateUserDTO {
+export default interface IUpdateUserDTO {
+  id: string;
   name: string;
-  cpf: string;
   email: string;
   is_deliveryman: boolean;
   password: string;
   password_confirmation: string;
 }
-export default ICreateUserDTO;

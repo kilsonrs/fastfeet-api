@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { getRepository } from 'typeorm';
-import { AppError } from '../errors/AppError';
-import { User } from '../../entities/User';
+import AppError from '../errors/AppError';
+import User from '../../entities/User';
 
 async function ensureAdminOnly(
   request: Request,
@@ -17,4 +17,4 @@ async function ensureAdminOnly(
   return next();
 }
 
-export { ensureAdminOnly };
+export default ensureAdminOnly;

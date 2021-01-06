@@ -1,10 +1,13 @@
-import { User } from "../entities/User"
-import { ICreateUserDTO } from "../useCases/CreateUser/CreateUserDTO"
+import User from '../entities/User';
+import ICreateUserDTO from '../useCases/CreateUser/CreateUserDTO';
+import IUpdateUserDTO from '../useCases/UpdateUser/UpdateUserDTO';
 
 interface IUsersRepository {
-  findByEmail(email: string): Promise<User | undefined>
-  findByCpf(cpf: string): Promise<User | undefined>
-  create(user: ICreateUserDTO): Promise<User>
+  findById(id: string): Promise<User | undefined>;
+  findByCpf(cpf: string): Promise<User | undefined>;
+  findByEmail(email: string): Promise<User | undefined>;
+  create(user: ICreateUserDTO): Promise<User>;
+  save(user: IUpdateUserDTO): Promise<User>;
 }
 
-export { IUsersRepository }
+export default IUsersRepository;

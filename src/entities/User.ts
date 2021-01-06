@@ -36,4 +36,4 @@ class User {
   updated_at: Date;
 }
 
-export { User };
+export default User;
