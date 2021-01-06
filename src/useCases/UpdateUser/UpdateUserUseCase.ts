@@ -7,13 +7,13 @@ class UpdateUserUseCase {
   constructor(private userRepository: IUsersRepository) {}
 
   public async execute(data: IUpdateUserDTO): Promise<User> {
-    const { id } = data;
+    const { id, password, password_confirmation } = data;
     const userExists = await this.userRepository.findById(id);
     if (!userExists) {
       throw new AppError('User not found');
     }
     const user = await this.userRepository.save(data);
-    if (data.password !== data.password_confirmation) {
+    if (password !== password_confirmation) {
       throw new AppError('Password and password confirmation does not match');
     }
     return user;

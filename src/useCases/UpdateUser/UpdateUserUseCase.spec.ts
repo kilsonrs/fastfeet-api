@@ -39,6 +39,19 @@ describe('UpdateUser UseCase', () => {
     expect(updatedUser.password).toBe('other_password');
   });
 
+  it('Should not be able to update a non-existing user', async () => {
+    await expect(
+      updateUser.execute({
+        id: 'invalid_id',
+        email: 'any_email@mail.com',
+        is_deliveryman: false,
+        name: 'any_name',
+        password: 'any_password',
+        password_confirmation: 'any_password',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
+
   it('should not be able to update a user if password and password_confirmation does not match', async () => {
     const user = await createUser.execute({
       name: 'any_name',
