@@ -11,7 +11,11 @@ class CreateUserUseCase {
   ) {}
 
   async execute(data: ICreateUserDTO): Promise<User> {
-    const { email, cpf, password } = data;
+    const { email, cpf, password, password_confirmation } = data;
+
+    if (password !== password_confirmation) {
+      throw new AppError('Password and password confirmation does not match');
+    }
 
     const cpfAlreadyExists = await this.usersRepository.findByCpf(cpf);
     if (cpfAlreadyExists) {
