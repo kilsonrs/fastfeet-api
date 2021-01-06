@@ -34,5 +34,7 @@ describe('UpdateUser UseCase', () => {
       password_confirmation: 'other_password',
     });
     expect(updatedUser.name).toBe('other_name');
+    expect(updatedUser.email).toBe('other_email@mail.com');
+    expect(updatedUser.password).toBe('other_password');
   });
 });
