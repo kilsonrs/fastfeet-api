@@ -3,9 +3,9 @@ import express from 'express';
 import 'express-async-errors';
 import routes from './routes';
 import './shared/database';
-import { uploadConfig } from './shared/config/upload';
+import uploadConfig from './shared/config/upload';
 
-import { errorMiddleware } from './shared/middlewares/errorMiddleware';
+import errorMiddleware from './shared/middlewares/errorMiddleware';
 
 const app = express();
 
