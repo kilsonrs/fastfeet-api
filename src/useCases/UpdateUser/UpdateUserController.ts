@@ -6,10 +6,12 @@ class UpdateUserController {
 
   public async handle(request: Request, response: Response): Promise<Response> {
     try {
-      this.updateUserUseCase.execute(request.body);
+      const user = request.body;
+      Object.assign(user, { id: request.params.id });
+      await this.updateUserUseCase.execute(user);
       return response.status(201).send();
     } catch (err) {
-      console.error(err);
+      console.error(err.message);
       return response.status(err.statusCode).json({
         message: err.message || 'Unexpected error',
       });

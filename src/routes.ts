@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { Joi, celebrate, Segments } from 'celebrate';
 import validator from 'cpf-cnpj-validator';
 import { createUserController } from './useCases/CreateUser';
+import { updateUserController } from './useCases/UpdateUser';
 
 const router = Router();
 
@@ -19,6 +20,22 @@ router.post(
   }),
   async (request, response) => {
     createUserController.handle(request, response);
+  },
+);
+
+router.put(
+  '/users/:id',
+  celebrate({
+    [Segments.BODY]: {
+      name: Joi.string(),
+      email: Joi.string().email(),
+      is_deliveryman: Joi.boolean(),
+      password: Joi.string(),
+      password_confirmation: Joi.string().valid(Joi.ref('password')),
+    },
+  }),
+  async (request, response) => {
+    updateUserController.handle(request, response);
   },
 );
 
