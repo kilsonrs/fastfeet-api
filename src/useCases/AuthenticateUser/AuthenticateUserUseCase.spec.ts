@@ -2,6 +2,7 @@ import FakeUserRepository from '../../repositories/fakes/FakeUserRepository';
 import CreateUserUseCase from '../CreateUser/CreateUserUseCase';
 import FakeHashProvider from '../../shared/providers/HashProvider/fakes/FakeHashProvider';
 import AuthenticateUserUseCase from './AuthenticateUserUseCase';
+import AppError from '../../shared/errors/AppError';
 
 let fakeUserRepository: FakeUserRepository;
 let createUser: CreateUserUseCase;
@@ -33,5 +34,13 @@ describe('AuthenticatedUser', () => {
     });
     expect(response).toHaveProperty('token');
     expect(response.user).toEqual(user);
+  });
+  it('Should not be able to Authenticate with non existing user', async () => {
+    await expect(
+      authenticateUser.execute({
+        email: 'non_existing_email@mail.com',
+        password: 'any_password',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
   });
 });
