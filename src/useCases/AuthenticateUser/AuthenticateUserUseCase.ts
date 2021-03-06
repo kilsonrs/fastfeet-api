@@ -1,5 +1,8 @@
+import { sign } from 'jsonwebtoken';
+
 import User from '../../entities/User';
 import IUsersRepository from '../../repositories/IUsersRepository';
+import authConfig from '../../shared/config/auth';
 import AppError from '../../shared/errors/AppError';
 import IHashProvider from '../../shared/providers/HashProvider/IHashProvider';
 
@@ -33,9 +36,13 @@ export default class AuthenticateUserUseCase {
       throw new AppError('Incorrect email/password combination', 401);
     }
 
+    const { secret, expiresIn } = authConfig.jwt;
+    const token = sign({}, secret, {
+      expiresIn,
+    });
     const response = {
       user,
-      token: '',
+      token,
     };
     return response;
   }
