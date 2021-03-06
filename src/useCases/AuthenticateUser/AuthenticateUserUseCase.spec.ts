@@ -43,4 +43,20 @@ describe('AuthenticatedUser', () => {
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
+  it('Should not be able to Authenticate with wrong password', async () => {
+    await createUser.execute({
+      name: 'any_name',
+      cpf: 'any_cpf',
+      email: 'any_email@mail.com',
+      is_deliveryman: false,
+      password: 'any_password',
+      password_confirmation: 'any_password',
+    });
+    await expect(
+      authenticateUser.execute({
+        email: 'any_email@mail.com',
+        password: 'wrong_password',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
 });
