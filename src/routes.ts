@@ -3,6 +3,7 @@ import { Joi, celebrate, Segments } from 'celebrate';
 import validator from 'cpf-cnpj-validator';
 import { createUserController } from './useCases/CreateUser';
 import { updateUserController } from './useCases/UpdateUser';
+import { authenticateUserController } from './useCases/AuthenticateUser';
 
 const router = Router();
 
@@ -22,6 +23,10 @@ router.post(
     createUserController.handle(request, response);
   },
 );
+
+router.post('/user-sessions', async (request, response) => {
+  authenticateUserController.handle(request, response);
+});
 
 router.put(
   '/users/:id',

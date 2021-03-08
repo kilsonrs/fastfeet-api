@@ -40,6 +40,7 @@ export default class AuthenticateUserUseCase {
     const token = sign({}, secret, {
       expiresIn,
     });
+
     const response = {
       user,
       token,
