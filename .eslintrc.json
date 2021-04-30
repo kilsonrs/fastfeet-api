@@ -17,9 +17,11 @@
   },
   "plugins": [
     "@typescript-eslint",
+    "eslint-plugin-import-helpers",
     "prettier"
   ],
   "rules": {
+    "import/prefer-default-export": "off",
     "prettier/prettier": "error",
     "no-console": "off",
     "camelcase": "off",
@@ -37,6 +39,14 @@
       "ignorePackages",
       {
         "ts": "never"
+      }
+    ],
+    "import-helpers/order-imports": [
+      "warn",
+      {
+        "newlinesBetween": "always",
+        "groups": ["module", "/^@shared/", ["parent", "sibling", "index"]],
+        "alphabetize": { "order": "asc", "ignoreCase": true }
       }
     ],
     "space-before-function-paren": "off"
