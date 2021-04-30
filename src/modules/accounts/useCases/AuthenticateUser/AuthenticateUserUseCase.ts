@@ -1,4 +1,5 @@
 import { sign } from 'jsonwebtoken';
+import { inject, injectable } from 'tsyringe';
 
 import authConfig from '../../../../shared/config/auth';
 import { AppError } from '../../../../shared/errors/AppError';
@@ -16,9 +17,12 @@ interface IResponse {
   token: string;
 }
 
+@injectable()
 class AuthenticateUserUseCase {
   constructor(
+    @inject('UsersRepository')
     private usersRepository: IUsersRepository,
+    @inject('HashProvider')
     private hashProvider: IHashProvider,
   ) {}
 
@@ -33,7 +37,6 @@ class AuthenticateUserUseCase {
       password,
       user.password,
     );
-
     if (!passwordMatched) {
       throw new AppError('Incorrect email/password combination', 401);
     }

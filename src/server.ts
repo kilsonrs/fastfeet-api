@@ -1,10 +1,14 @@
+/* eslint-disable import-helpers/order-imports */
 import 'reflect-metadata';
 import cors from 'cors';
 import express from 'express';
-import 'express-async-errors';
 
+import 'express-async-errors';
 import { routes } from './routes';
+
 import './shared/database';
+import './shared/container';
+import './shared/providers';
 import { uploadConfig } from './shared/config/upload';
 import { errorMiddleware } from './shared/middlewares/errorMiddleware';
 

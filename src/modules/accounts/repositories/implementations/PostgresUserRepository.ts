@@ -1,8 +1,8 @@
 import { getRepository, Repository } from 'typeorm';
 
+import { ICreateUserDTO } from '../../dtos/ICreateUserDTO';
+import { IUpdateUserDTO } from '../../dtos/IUpdateUserDTO';
 import { User } from '../../entities/User';
-import { ICreateUserDTO } from '../../useCases/CreateUser/CreateUserDTO';
-import { IUpdateUserDTO } from '../../useCases/UpdateUser/UpdateUserDTO';
 import { IUsersRepository } from '../IUsersRepository';
 
 class PostgresUserRepository implements IUsersRepository {

@@ -1,10 +1,16 @@
+import { inject, injectable } from 'tsyringe';
+
 import { AppError } from '../../../../shared/errors/AppError';
+import { IUpdateUserDTO } from '../../dtos/IUpdateUserDTO';
 import { User } from '../../entities/User';
 import { IUsersRepository } from '../../repositories/IUsersRepository';
-import { IUpdateUserDTO } from './UpdateUserDTO';
 
+@injectable()
 class UpdateUserUseCase {
-  constructor(private userRepository: IUsersRepository) {}
+  constructor(
+    @inject('UsersRepository')
+    private userRepository: IUsersRepository,
+  ) {}
 
   public async execute(data: IUpdateUserDTO): Promise<User> {
     const { id, email, password, password_confirmation } = data;

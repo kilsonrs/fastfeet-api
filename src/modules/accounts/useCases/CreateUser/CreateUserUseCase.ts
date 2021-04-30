@@ -1,12 +1,17 @@
+import { inject, injectable } from 'tsyringe';
+
 import { AppError } from '../../../../shared/errors/AppError';
 import { IHashProvider } from '../../../../shared/providers/HashProvider/IHashProvider';
+import { ICreateUserDTO } from '../../dtos/ICreateUserDTO';
 import { User } from '../../entities/User';
 import { IUsersRepository } from '../../repositories/IUsersRepository';
-import { ICreateUserDTO } from './CreateUserDTO';
 
+@injectable()
 class CreateUserUseCase {
   constructor(
+    @inject('UsersRepository')
     private usersRepository: IUsersRepository,
+    @inject('HashProvider')
     private hashProvider: IHashProvider,
   ) {}
 

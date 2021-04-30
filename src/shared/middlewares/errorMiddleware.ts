@@ -32,7 +32,7 @@ const errorMiddleware = (
 
   return response.status(500).json({
     status: 'error',
-    message: 'Internal Server Error',
+    message: `Internal Server Error - ${err.message}`,
   });
 };
 export { errorMiddleware };
