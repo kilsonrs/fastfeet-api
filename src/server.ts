@@ -17,6 +17,6 @@ app.use(routes);
 
 app.use(errorMiddleware);
 
-app.listen(3334, () => {
-  console.log('🚀 Server started on port 3334');
+app.listen(3335, () => {
+  console.log('🚀 Server started on port 3335');
 });
