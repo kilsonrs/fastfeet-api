@@ -1,9 +1,9 @@
 import { getRepository, Repository } from 'typeorm';
 
-import IUsersRepository from '../IUsersRepository';
-import User from '../../entities/User';
-import ICreateUserDTO from '../../useCases/CreateUser/CreateUserDTO';
-import IUpdateUserDTO from '../../useCases/UpdateUser/UpdateUserDTO';
+import { User } from '../../entities/User';
+import { ICreateUserDTO } from '../../useCases/CreateUser/CreateUserDTO';
+import { IUpdateUserDTO } from '../../useCases/UpdateUser/UpdateUserDTO';
+import { IUsersRepository } from '../IUsersRepository';
 
 class PostgresUserRepository implements IUsersRepository {
   private repository: Repository<User>;
@@ -39,4 +39,4 @@ class PostgresUserRepository implements IUsersRepository {
   }
 }
 
-export default PostgresUserRepository;
+export { PostgresUserRepository };

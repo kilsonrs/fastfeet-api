@@ -1,8 +1,8 @@
-import User from '../../entities/User';
-import IUsersRepository from '../../repositories/IUsersRepository';
-import AppError from '../../shared/errors/AppError';
-import IHashProvider from '../../shared/providers/HashProvider/IHashProvider';
-import ICreateUserDTO from './CreateUserDTO';
+import { AppError } from '../../../../shared/errors/AppError';
+import { IHashProvider } from '../../../../shared/providers/HashProvider/IHashProvider';
+import { User } from '../../entities/User';
+import { IUsersRepository } from '../../repositories/IUsersRepository';
+import { ICreateUserDTO } from './CreateUserDTO';
 
 class CreateUserUseCase {
   constructor(
@@ -38,4 +38,4 @@ class CreateUserUseCase {
   }
 }
 
-export default CreateUserUseCase;
+export { CreateUserUseCase };

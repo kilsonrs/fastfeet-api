@@ -1,13 +1,14 @@
-import { Router } from 'express';
 import { Joi, celebrate, Segments } from 'celebrate';
 import validator from 'cpf-cnpj-validator';
-import createUserController from './useCases/CreateUser';
-import updateUserController from './useCases/UpdateUser';
-import authenticateUserController from './useCases/AuthenticateUser';
+import { Router } from 'express';
 
-const router = Router();
+import authenticateUserController from './modules/accounts/useCases/AuthenticateUser';
+import createUserController from './modules/accounts/useCases/CreateUser';
+import updateUserController from './modules/accounts/useCases/UpdateUser';
 
-router.post(
+const routes = Router();
+
+routes.post(
   '/users',
   celebrate({
     [Segments.BODY]: {
@@ -24,11 +25,11 @@ router.post(
   },
 );
 
-router.post('/user-sessions', async (request, response) => {
+routes.post('/user-sessions', async (request, response) => {
   authenticateUserController().handle(request, response);
 });
 
-router.put(
+routes.put(
   '/users/:id',
   celebrate({
     [Segments.BODY]: {
@@ -44,4 +45,4 @@ router.put(
   },
 );
 
-export default router;
+export { routes };

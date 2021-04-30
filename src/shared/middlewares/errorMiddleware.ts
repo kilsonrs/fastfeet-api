@@ -1,6 +1,8 @@
-import { Request, Response, NextFunction } from 'express';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { isCelebrateError } from 'celebrate';
-import AppError from '../errors/AppError';
+import { Request, Response, NextFunction } from 'express';
+
+import { AppError } from '../errors/AppError';
 
 interface ValidationError extends Error {
   details: Map<string, string>;
@@ -33,4 +35,4 @@ const errorMiddleware = (
     message: 'Internal Server Error',
   });
 };
-export default errorMiddleware;
+export { errorMiddleware };

@@ -1,12 +1,12 @@
 import 'reflect-metadata';
+import cors from 'cors';
 import express from 'express';
 import 'express-async-errors';
-import cors from 'cors';
-import routes from './routes';
-import './shared/database';
-import uploadConfig from './shared/config/upload';
 
-import errorMiddleware from './shared/middlewares/errorMiddleware';
+import { routes } from './routes';
+import './shared/database';
+import { uploadConfig } from './shared/config/upload';
+import { errorMiddleware } from './shared/middlewares/errorMiddleware';
 
 const app = express();
 

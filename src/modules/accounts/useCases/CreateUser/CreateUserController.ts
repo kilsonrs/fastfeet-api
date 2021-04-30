@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
-import CreateUserUseCase from './CreateUserUseCase';
+
+import { CreateUserUseCase } from './CreateUserUseCase';
 
 class CreateUserController {
   constructor(private createUserUseCase: CreateUserUseCase) {}
@@ -18,4 +19,4 @@ class CreateUserController {
   }
 }
 
-export default CreateUserController;
+export { CreateUserController };

@@ -7,7 +7,7 @@
   "database": "fastfeet",
   "logging": true,
   "entities": [
-    "./src/entities/*.ts"
+    "./src/modules/**/entities/*.ts"
   ],
   "migrations": [
     "./src/shared/database/migrations/*.ts"

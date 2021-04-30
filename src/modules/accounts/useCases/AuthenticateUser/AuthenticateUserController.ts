@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
-import UserMapper from '../../shared/mappers/UserMapper';
-import AuthenticateUserUseCase from './AuthenticateUserUseCase';
+
+import { UserMapper } from '../../../../shared/mappers/UserMapper';
+import { AuthenticateUserUseCase } from './AuthenticateUserUseCase';
 
 class AuthenticateUserController {
   constructor(
@@ -28,4 +29,4 @@ class AuthenticateUserController {
   }
 }
 
-export default AuthenticateUserController;
+export { AuthenticateUserController };

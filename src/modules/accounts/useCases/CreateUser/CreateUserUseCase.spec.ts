@@ -1,7 +1,7 @@
-import FakeUserRepository from '../../repositories/fakes/FakeUserRepository';
-import AppError from '../../shared/errors/AppError';
-import FakeHashProvider from '../../shared/providers/HashProvider/fakes/FakeHashProvider';
-import CreateUserUseCase from './CreateUserUseCase';
+import { AppError } from '../../../../shared/errors/AppError';
+import { FakeHashProvider } from '../../../../shared/providers/HashProvider/fakes/FakeHashProvider';
+import { FakeUserRepository } from '../../repositories/fakes/FakeUserRepository';
+import { CreateUserUseCase } from './CreateUserUseCase';
 
 let createUser: CreateUserUseCase;
 let fakeUserRepository: FakeUserRepository;

@@ -1,8 +1,8 @@
-import PostgresUserRepository from '../../repositories/implementations/PostgresUserRepository';
-import BCryptHashProvider from '../../shared/providers/HashProvider/implementations/BCryptHashProvider';
-import AuthenticateUserController from './AuthenticateUserController';
-import AuthenticateUserUseCase from './AuthenticateUserUseCase';
-import UserMapper from '../../shared/mappers/UserMapper';
+import { UserMapper } from '../../../../shared/mappers/UserMapper';
+import { BCryptHashProvider } from '../../../../shared/providers/HashProvider/implementations/BCryptHashProvider';
+import { PostgresUserRepository } from '../../repositories/implementations/PostgresUserRepository';
+import { AuthenticateUserController } from './AuthenticateUserController';
+import { AuthenticateUserUseCase } from './AuthenticateUserUseCase';
 
 export default (): AuthenticateUserController => {
   const usersRepository = new PostgresUserRepository();

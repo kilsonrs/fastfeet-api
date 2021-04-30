@@ -1,6 +1,6 @@
-import User from '../entities/User';
-import ICreateUserDTO from '../useCases/CreateUser/CreateUserDTO';
-import IUpdateUserDTO from '../useCases/UpdateUser/UpdateUserDTO';
+import { User } from '../entities/User';
+import { ICreateUserDTO } from '../useCases/CreateUser/CreateUserDTO';
+import { IUpdateUserDTO } from '../useCases/UpdateUser/UpdateUserDTO';
 
 interface IUsersRepository {
   findById(id: string): Promise<User>;
@@ -10,4 +10,4 @@ interface IUsersRepository {
   save(user: IUpdateUserDTO): Promise<User>;
 }
 
-export default IUsersRepository;
+export { IUsersRepository };

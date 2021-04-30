@@ -1,8 +1,8 @@
-import path from 'path';
-import multer from 'multer';
 import crypto from 'crypto';
+import multer from 'multer';
+import path from 'path';
 
-const tmpFolder = path.resolve(__dirname, '..', '..', 'tmp');
+const tmpFolder = path.resolve(__dirname, '..', '..', '..', 'tmp');
 
 const uploadConfig = {
   tmpFolder,
@@ -20,4 +20,4 @@ const uploadConfig = {
   },
 };
 
-export default uploadConfig;
+export { uploadConfig };

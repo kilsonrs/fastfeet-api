@@ -6,4 +6,4 @@ interface ICreateUserDTO {
   password: string;
   password_confirmation: string;
 }
-export default ICreateUserDTO;
+export { ICreateUserDTO };

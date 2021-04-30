@@ -1,6 +1,6 @@
-import User from '../../entities/User';
+import { User } from '../../modules/accounts/entities/User';
 
-class UserMap {
+class UserMapper {
   toDTO(
     user: User,
   ): Omit<User, 'password' | 'cpf' | 'created_at' | 'updated_at'> {
@@ -13,4 +13,4 @@ class UserMap {
   }
 }
 
-export default UserMap;
+export { UserMapper };

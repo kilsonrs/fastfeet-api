@@ -1,7 +1,7 @@
-import IUpdateUserDTO from './UpdateUserDTO';
-import IUsersRepository from '../../repositories/IUsersRepository';
-import User from '../../entities/User';
-import AppError from '../../shared/errors/AppError';
+import { AppError } from '../../../../shared/errors/AppError';
+import { User } from '../../entities/User';
+import { IUsersRepository } from '../../repositories/IUsersRepository';
+import { IUpdateUserDTO } from './UpdateUserDTO';
 
 class UpdateUserUseCase {
   constructor(private userRepository: IUsersRepository) {}
@@ -26,4 +26,4 @@ class UpdateUserUseCase {
   }
 }
 
-export default UpdateUserUseCase;
+export { UpdateUserUseCase };

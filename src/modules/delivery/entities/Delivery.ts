@@ -1,3 +1,4 @@
+import { Expose } from 'class-transformer';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -7,8 +8,8 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import { Expose } from 'class-transformer';
-import User from './User';
+
+import { User } from '../../accounts/entities/User';
 
 @Entity('deliveries')
 class Delivery {
@@ -70,4 +71,4 @@ class Delivery {
   }
 }
 
-export default Delivery;
+export { Delivery };

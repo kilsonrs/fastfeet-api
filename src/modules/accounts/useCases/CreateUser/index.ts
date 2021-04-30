@@ -1,7 +1,7 @@
-import PostgresUserRepository from '../../repositories/implementations/PostgresUserRepository';
-import BCryptHashProvider from '../../shared/providers/HashProvider/implementations/BCryptHashProvider';
-import CreateUserController from './CreateUserController';
-import CreateUserUseCase from './CreateUserUseCase';
+import { BCryptHashProvider } from '../../../../shared/providers/HashProvider/implementations/BCryptHashProvider';
+import { PostgresUserRepository } from '../../repositories/implementations/PostgresUserRepository';
+import { CreateUserController } from './CreateUserController';
+import { CreateUserUseCase } from './CreateUserUseCase';
 
 export default (): CreateUserController => {
   const usersRepository = new PostgresUserRepository();

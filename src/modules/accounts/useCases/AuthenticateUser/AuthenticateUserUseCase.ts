@@ -1,10 +1,10 @@
 import { sign } from 'jsonwebtoken';
 
-import User from '../../entities/User';
-import IUsersRepository from '../../repositories/IUsersRepository';
-import authConfig from '../../shared/config/auth';
-import AppError from '../../shared/errors/AppError';
-import IHashProvider from '../../shared/providers/HashProvider/IHashProvider';
+import authConfig from '../../../../shared/config/auth';
+import { AppError } from '../../../../shared/errors/AppError';
+import { IHashProvider } from '../../../../shared/providers/HashProvider/IHashProvider';
+import { User } from '../../entities/User';
+import { IUsersRepository } from '../../repositories/IUsersRepository';
 
 interface IRequest {
   email: string;
@@ -16,7 +16,7 @@ interface IResponse {
   token: string;
 }
 
-export default class AuthenticateUserUseCase {
+class AuthenticateUserUseCase {
   constructor(
     private usersRepository: IUsersRepository,
     private hashProvider: IHashProvider,
@@ -24,19 +24,22 @@ export default class AuthenticateUserUseCase {
 
   async execute({ email, password }: IRequest): Promise<IResponse> {
     const user = await this.usersRepository.findByEmail(email);
-    console.log(!user);
+
     if (!user) {
       throw new AppError('Incorrect email/password combination', 401);
     }
+
     const passwordMatched = await this.hashProvider.compareHash(
       password,
       user.password,
     );
+
     if (!passwordMatched) {
       throw new AppError('Incorrect email/password combination', 401);
     }
 
     const { secret, expiresIn } = authConfig.jwt;
+
     const token = sign({}, secret, {
       expiresIn,
     });
@@ -48,3 +51,5 @@ export default class AuthenticateUserUseCase {
     return response;
   }
 }
+
+export { AuthenticateUserUseCase };

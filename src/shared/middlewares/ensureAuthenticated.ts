@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 import { verify } from 'jsonwebtoken';
-import AppError from '../errors/AppError';
+
 import authConfig from '../config/auth';
+import { AppError } from '../errors/AppError';
 
 interface TokenPayload {
   iap: number;
@@ -32,4 +33,4 @@ function ensureAuthenticated(
   }
 }
 
-export default ensureAuthenticated;
+export { ensureAuthenticated };

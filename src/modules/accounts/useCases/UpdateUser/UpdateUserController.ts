@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
-import UpdateUserUseCase from './UpdateUserUseCase';
+
+import { UpdateUserUseCase } from './UpdateUserUseCase';
 
 class UpdateUserController {
   constructor(private updateUserUseCase: UpdateUserUseCase) {}
@@ -19,4 +20,4 @@ class UpdateUserController {
   }
 }
 
-export default UpdateUserController;
+export { UpdateUserController };

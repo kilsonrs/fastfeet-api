@@ -1,4 +1,4 @@
-export default interface IUpdateUserDTO {
+interface IUpdateUserDTO {
   id: string;
   name: string;
   email: string;
@@ -6,3 +6,5 @@ export default interface IUpdateUserDTO {
   password: string;
   password_confirmation: string;
 }
+
+export { IUpdateUserDTO };

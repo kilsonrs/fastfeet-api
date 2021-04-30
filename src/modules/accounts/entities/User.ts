@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import {
   Entity,
   Column,
@@ -5,8 +6,6 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
-
-import { Exclude } from 'class-transformer';
 
 @Entity('users')
 class User {
@@ -36,4 +35,4 @@ class User {
   updated_at: Date;
 }
 
-export default User;
+export { User };
