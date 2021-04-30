@@ -3,11 +3,16 @@ import BCryptHashProvider from '../../shared/providers/HashProvider/implementati
 import CreateUserController from './CreateUserController';
 import CreateUserUseCase from './CreateUserUseCase';
 
-const usersRepository = new PostgresUserRepository();
-const hashProvider = new BCryptHashProvider();
+export default (): CreateUserController => {
+  const usersRepository = new PostgresUserRepository();
+  const hashProvider = new BCryptHashProvider();
 
-const createUserUseCase = new CreateUserUseCase(usersRepository, hashProvider);
+  const createUserUseCase = new CreateUserUseCase(
+    usersRepository,
+    hashProvider,
+  );
 
-const createUserController = new CreateUserController(createUserUseCase);
+  const createUserController = new CreateUserController(createUserUseCase);
 
-export { createUserUseCase, createUserController };
+  return createUserController;
+};

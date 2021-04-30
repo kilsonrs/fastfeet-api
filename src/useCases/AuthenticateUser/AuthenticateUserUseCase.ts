@@ -24,6 +24,7 @@ export default class AuthenticateUserUseCase {
 
   async execute({ email, password }: IRequest): Promise<IResponse> {
     const user = await this.usersRepository.findByEmail(email);
+    console.log(!user);
     if (!user) {
       throw new AppError('Incorrect email/password combination', 401);
     }
@@ -31,7 +32,6 @@ export default class AuthenticateUserUseCase {
       password,
       user.password,
     );
-
     if (!passwordMatched) {
       throw new AppError('Incorrect email/password combination', 401);
     }

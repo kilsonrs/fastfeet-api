@@ -18,7 +18,7 @@ class AuthenticateUserController {
         token,
       };
 
-      return response.json(userSession);
+      return response.status(200).json(userSession);
     } catch (err) {
       console.error(err.message);
       return response.status(err.statusCode).json({
