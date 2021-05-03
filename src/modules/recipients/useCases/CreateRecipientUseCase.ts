@@ -1,10 +1,16 @@
+import { inject, injectable } from 'tsyringe';
+
 import { AppError } from '../../../shared/errors/AppError';
 import { IRecipientDTO } from '../dtos/IRecipientDTO';
 import { Recipient } from '../entities/Recipient';
 import { IRecipientRepository } from '../repositories/IRecipientRepository';
 
+@injectable()
 class CreateRecipientUseCase {
-  constructor(private recipientRepository: IRecipientRepository) {}
+  constructor(
+    @inject('RecipientRepository')
+    private recipientRepository: IRecipientRepository,
+  ) {}
 
   async execute({
     name,
@@ -19,6 +25,7 @@ class CreateRecipientUseCase {
     if (!name) {
       throw new AppError('Recipient name must be provided');
     }
+
     const recipient = await this.recipientRepository.create({
       name,
       street_name,
