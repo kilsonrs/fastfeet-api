@@ -2,10 +2,7 @@
 import { AppError } from '../../../shared/errors/AppError';
 import { IRecipientDTO } from '../dtos/IRecipientDTO';
 import { Recipient } from '../entities/Recipient';
-
-interface IRecipientRepository {
-  create(data: IRecipientDTO): Promise<Recipient>;
-}
+import { IRecipientRepository } from '../repositories/IRecipientRepository';
 
 class FakeRecipientRepository implements IRecipientRepository {
   private recipients: Recipient[] = [];
