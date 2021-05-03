@@ -1,9 +1,9 @@
 import { inject, injectable } from 'tsyringe';
 
-import { AppError } from '../../../shared/errors/AppError';
-import { IRecipientDTO } from '../dtos/IRecipientDTO';
-import { Recipient } from '../entities/Recipient';
-import { IRecipientRepository } from '../repositories/IRecipientRepository';
+import { AppError } from '../../../../shared/errors/AppError';
+import { IRecipientDTO } from '../../dtos/IRecipientDTO';
+import { Recipient } from '../../entities/Recipient';
+import { IRecipientRepository } from '../../repositories/IRecipientRepository';
 
 @injectable()
 class CreateRecipientUseCase {

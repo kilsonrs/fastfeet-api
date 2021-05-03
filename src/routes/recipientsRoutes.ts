@@ -1,16 +1,16 @@
 import { Router } from 'express';
 
-import { CreateRecipientsController } from '../modules/recipients/useCases/CreateRecipientsController';
+import { CreateRecipientController } from '../modules/recipients/useCases/CreateRecipient/CreateRecipientController';
 import { ensureAdminOnly } from '../shared/middlewares/ensureAdminOnly';
 import { ensureAuthenticated } from '../shared/middlewares/ensureAuthenticated';
 
 const recipientsRoutes = Router();
 
-const createRecipientsController = new CreateRecipientsController();
+const createRecipientController = new CreateRecipientController();
 
 recipientsRoutes.use(ensureAuthenticated);
 recipientsRoutes.use(ensureAdminOnly);
 
-recipientsRoutes.post('/', createRecipientsController.handle);
+recipientsRoutes.post('/', createRecipientController.handle);
 
 export { recipientsRoutes };

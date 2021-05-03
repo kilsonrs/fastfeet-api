@@ -3,7 +3,7 @@ import { container } from 'tsyringe';
 
 import { CreateRecipientUseCase } from './CreateRecipientUseCase';
 
-class CreateRecipientsController {
+class CreateRecipientController {
   async handle(request: Request, response: Response): Promise<Response> {
     const {
       name,
@@ -30,4 +30,4 @@ class CreateRecipientsController {
   }
 }
 
-export { CreateRecipientsController };
+export { CreateRecipientController };

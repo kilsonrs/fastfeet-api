@@ -1,5 +1,5 @@
-import { AppError } from '../../../shared/errors/AppError';
-import { FakeRecipientRepository } from '../repositories/fakes/FakeRecipientRepository';
+import { AppError } from '../../../../shared/errors/AppError';
+import { FakeRecipientRepository } from '../../repositories/fakes/FakeRecipientRepository';
 import { CreateRecipientUseCase } from './CreateRecipientUseCase';
 
 let fakeRecipientRepository: FakeRecipientRepository;
