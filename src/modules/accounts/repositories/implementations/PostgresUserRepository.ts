@@ -33,6 +33,11 @@ class PostgresUserRepository implements IUsersRepository {
     return user;
   }
 
+  public async list(): Promise<User[]> {
+    const user = await this.repository.find();
+    return user;
+  }
+
   public async save(userData: IUpdateUserDTO): Promise<User> {
     const user = await this.repository.save(userData);
     return user;

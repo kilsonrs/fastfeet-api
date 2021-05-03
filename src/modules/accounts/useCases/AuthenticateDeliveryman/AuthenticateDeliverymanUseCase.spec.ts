@@ -1,32 +1,26 @@
 import { AppError } from '../../../../shared/errors/AppError';
 import { FakeHashProvider } from '../../../../shared/providers/HashProvider/fakes/FakeHashProvider';
 import { FakeUserRepository } from '../../repositories/fakes/FakeUserRepository';
-import { CreateUserUseCase } from './CreateUserUseCase';
+import { CreateUserUseCase } from '../CreateUser/CreateUserUseCase';
+import { AuthenticateDeliverymanUseCase } from './AuthenticateDeliverymanUseCase';
 
-let createUser: CreateUserUseCase;
 let fakeUserRepository: FakeUserRepository;
+let createUser: CreateUserUseCase;
 let fakeHashProvider: FakeHashProvider;
+let authenticateUser: AuthenticateDeliverymanUseCase;
 
-describe('Create User UseCase', () => {
+describe('AuthenticatedDeliveryman', () => {
   beforeEach(() => {
     fakeUserRepository = new FakeUserRepository();
     fakeHashProvider = new FakeHashProvider();
     createUser = new CreateUserUseCase(fakeUserRepository, fakeHashProvider);
+    authenticateUser = new AuthenticateDeliverymanUseCase(
+      fakeUserRepository,
+      fakeHashProvider,
+    );
   });
 
-  it('Should be able create a new user', async () => {
-    const user = await createUser.execute({
-      name: 'any_name',
-      cpf: 'any_cpf',
-      email: 'any_email@mail.com',
-      is_deliveryman: false,
-      password: 'any_password',
-      password_confirmation: 'any_password',
-    });
-    expect(user).toHaveProperty('id');
-  });
-
-  it('Should be able create a new user with deliveryman true by default', async () => {
+  it('Should be able to Authenticate', async () => {
     const user = await createUser.execute({
       name: 'any_name',
       cpf: 'any_cpf',
@@ -34,49 +28,53 @@ describe('Create User UseCase', () => {
       password: 'any_password',
       password_confirmation: 'any_password',
     });
-    expect(user.is_deliveryman).toBe(true);
+    const response = await authenticateUser.execute({
+      cpf: 'any_cpf',
+      password: 'any_password',
+    });
+    expect(response).toHaveProperty('token');
+    expect(response.user).toEqual(user);
   });
 
-  it('Should not be able create a new user with an cpf already in use', async () => {
-    await createUser.execute({
-      name: 'any_name',
-      cpf: 'same_cpf',
-      email: 'any_email@mail.com',
-      is_deliveryman: false,
-      password: 'any_password',
-      password_confirmation: 'any_password',
-    });
-
+  it('Should not be able to Authenticate with non existing user', async () => {
     await expect(
-      createUser.execute({
-        name: 'other_name',
-        cpf: 'same_cpf',
-        email: 'other_email@mail.com',
-        is_deliveryman: false,
+      authenticateUser.execute({
+        cpf: 'non_existing_cpf',
         password: 'any_password',
-        password_confirmation: 'any_password',
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
 
-  it('Should not be able create a new user with an email already in use', async () => {
+  it('Should not be able to Authenticate with wrong password', async () => {
     await createUser.execute({
       name: 'any_name',
       cpf: 'any_cpf',
-      email: 'same_email@mail.com',
+      email: 'any_email@mail.com',
+      is_deliveryman: true,
+      password: 'any_password',
+      password_confirmation: 'any_password',
+    });
+    await expect(
+      authenticateUser.execute({
+        cpf: 'any_cpf',
+        password: 'wrong_password',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
+
+  it('Should not be able to Authenticate with user non delivery man', async () => {
+    await createUser.execute({
+      name: 'any_name',
+      cpf: 'any_cpf',
+      email: 'any_email@mail.com',
       is_deliveryman: false,
       password: 'any_password',
       password_confirmation: 'any_password',
     });
-
     await expect(
-      createUser.execute({
-        name: 'other_name',
-        cpf: 'other_cpf',
-        email: 'same_email@mail.com',
-        is_deliveryman: false,
+      authenticateUser.execute({
+        cpf: 'any_cpf',
         password: 'any_password',
-        password_confirmation: 'any_password',
       }),
     ).rejects.toBeInstanceOf(AppError);
   });

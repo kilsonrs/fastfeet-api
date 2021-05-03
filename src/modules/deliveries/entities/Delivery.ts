@@ -24,7 +24,11 @@ class Delivery {
   deliveryman: User;
 
   @Column()
-  recipient: string;
+  recipient_id: string;
+
+  // @ManyToOne(() => Recipient)
+  // @JoinColumn({name: 'recipient_id'})
+  // recipient: Recipient;
 
   @Column()
   product: string;

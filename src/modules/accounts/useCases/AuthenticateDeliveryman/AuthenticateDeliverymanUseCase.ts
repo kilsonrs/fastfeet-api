@@ -7,7 +7,7 @@ import { IHashProvider } from '../../../../shared/providers/HashProvider/IHashPr
 import { IUsersRepository } from '../../repositories/IUsersRepository';
 
 interface IRequest {
-  email: string;
+  cpf: string;
   password: string;
 }
 
@@ -21,7 +21,7 @@ interface IResponse {
 }
 
 @injectable()
-class AuthenticateUserUseCase {
+class AuthenticateDeliverymanUseCase {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
@@ -29,11 +29,15 @@ class AuthenticateUserUseCase {
     private hashProvider: IHashProvider,
   ) {}
 
-  async execute({ email, password }: IRequest): Promise<IResponse> {
-    const user = await this.usersRepository.findByEmail(email);
+  async execute({ cpf, password }: IRequest): Promise<IResponse> {
+    const user = await this.usersRepository.findByCpf(cpf);
 
     if (!user) {
-      throw new AppError('Incorrect email/password combination', 401);
+      throw new AppError('Incorrect cpf/password combination', 401);
+    }
+
+    if (!user.is_deliveryman) {
+      throw new AppError('You are not a delivery man', 401);
     }
 
     const passwordMatched = await this.hashProvider.compareHash(
@@ -41,7 +45,7 @@ class AuthenticateUserUseCase {
       user.password,
     );
     if (!passwordMatched) {
-      throw new AppError('Incorrect email/password combination', 401);
+      throw new AppError('Incorrect cpf/password combination', 401);
     }
 
     const { secret, expiresIn } = authConfig.jwt;
@@ -63,4 +67,4 @@ class AuthenticateUserUseCase {
   }
 }
 
-export { AuthenticateUserUseCase };
+export { AuthenticateDeliverymanUseCase };

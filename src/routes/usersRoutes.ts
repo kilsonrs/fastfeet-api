@@ -5,13 +5,25 @@ import Joi from 'joi';
 
 import { AuthenticateUserController } from '../modules/accounts/useCases/AuthenticateUser/AuthenticateUserController';
 import { CreateUserController } from '../modules/accounts/useCases/CreateUser/CreateUserController';
+import { ListUserController } from '../modules/accounts/useCases/ListUser/ListUserController';
 import { UpdateUserController } from '../modules/accounts/useCases/UpdateUser/UpdateUserController';
+import { ensureAdminOnly } from '../shared/middlewares/ensureAdminOnly';
+import { ensureAuthenticated } from '../shared/middlewares/ensureAuthenticated';
 
 export const usersRoutes = Router();
 
 const createUsersController = new CreateUserController();
 const authenticateUserController = new AuthenticateUserController();
 const updateUserController = new UpdateUserController();
+const listUserController = new ListUserController();
+
+usersRoutes.post('/sessions', authenticateUserController.handle);
+
+usersRoutes.use(ensureAuthenticated);
+
+usersRoutes.use(ensureAdminOnly);
+
+usersRoutes.get('/', listUserController.handle);
 
 usersRoutes.post(
   '/',
@@ -27,8 +39,6 @@ usersRoutes.post(
   }),
   createUsersController.handle,
 );
-
-usersRoutes.post('/sessions', authenticateUserController.handle);
 
 usersRoutes.put(
   '/:id',

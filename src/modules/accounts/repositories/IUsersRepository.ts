@@ -7,6 +7,7 @@ interface IUsersRepository {
   findByCpf(cpf: string): Promise<User>;
   findByEmail(email: string): Promise<User>;
   create(user: ICreateUserDTO): Promise<User>;
+  list(): Promise<User[]>;
   save(user: IUpdateUserDTO): Promise<User>;
 }
 

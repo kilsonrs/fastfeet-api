@@ -11,9 +11,14 @@ async function ensureAdminOnly(
 ): Promise<void> {
   const getUsers = getRepository(User);
   const userId = request.user.id;
+  console.log(request.user);
   const user = await getUsers.findOne(userId);
-  if (!user || user.is_deliveryman) {
-    throw new AppError('User not found or without permission to access.');
+  console.log(user);
+  if (!user) {
+    throw new AppError('User not found.');
+  }
+  if (user.is_deliveryman) {
+    throw new AppError('User without permission to access.', 401);
   }
   return next();
 }

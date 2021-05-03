@@ -1,8 +1,6 @@
-import { v4 as uuid } from 'uuid';
-
+import { ICreateUserDTO } from '../../dtos/ICreateUserDTO';
+import { IUpdateUserDTO } from '../../dtos/IUpdateUserDTO';
 import { User } from '../../entities/User';
-import { ICreateUserDTO } from '../../useCases/CreateUser/CreateUserDTO';
-import { IUpdateUserDTO } from '../../useCases/UpdateUser/UpdateUserDTO';
 import { IUsersRepository } from '../IUsersRepository';
 
 class FakeUserRepository implements IUsersRepository {
@@ -23,9 +21,13 @@ class FakeUserRepository implements IUsersRepository {
     return findUser;
   }
 
+  public async list(): Promise<User[]> {
+    return this.users;
+  }
+
   public async create(userData: ICreateUserDTO): Promise<User> {
     const user = new User();
-    Object.assign(user, { id: uuid() }, userData);
+    Object.assign(user, userData);
     this.users.push(user);
     return user;
   }

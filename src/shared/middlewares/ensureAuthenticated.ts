@@ -23,9 +23,11 @@ async function ensureAuthenticated(
 
   try {
     const decoded = verify(token, authConfig.jwt.secret);
-    const { sub } = decoded as TokenPayload;
+    const { sub: user_id } = decoded as TokenPayload;
+    console.log(decoded);
+
     request.user = {
-      id: sub,
+      id: user_id,
     };
     return next();
   } catch {

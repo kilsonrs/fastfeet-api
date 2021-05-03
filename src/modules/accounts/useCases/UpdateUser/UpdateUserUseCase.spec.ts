@@ -17,7 +17,7 @@ describe('UpdateUser UseCase', () => {
     updateUser = new UpdateUserUseCase(fakeUserRepository);
   });
 
-  it('should be able to update a user', async () => {
+  it('should be able to update an user', async () => {
     const user = await createUser.execute({
       name: 'any_name',
       cpf: 'any_cpf',
@@ -42,9 +42,8 @@ describe('UpdateUser UseCase', () => {
   it('Should not be able to update a non-existing user', async () => {
     await expect(
       updateUser.execute({
-        id: 'invalid_id',
+        id: 'any_id',
         email: 'any_email@mail.com',
-        is_deliveryman: false,
         name: 'any_name',
         password: 'any_password',
         password_confirmation: 'any_password',
@@ -52,12 +51,11 @@ describe('UpdateUser UseCase', () => {
     ).rejects.toBeInstanceOf(AppError);
   });
 
-  it('should not be able to update a user if password and password_confirmation does not match', async () => {
+  it('should not be able to update an user if password and password_confirmation does not match', async () => {
     const user = await createUser.execute({
       name: 'any_name',
       cpf: 'any_cpf',
       email: 'any_email@mail.com',
-      is_deliveryman: false,
       password: 'any_password',
       password_confirmation: 'any_password',
     });
@@ -66,9 +64,33 @@ describe('UpdateUser UseCase', () => {
         id: user.id,
         name: 'any_name',
         email: 'any_email@mail.com',
-        is_deliveryman: false,
         password: 'any_password',
         password_confirmation: 'other_password',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
+
+  it('Should not be able update an user with an email already in use', async () => {
+    const user = await createUser.execute({
+      name: 'any_name',
+      cpf: 'any_cpf',
+      email: 'any_email@mail.com',
+      password: 'any_password',
+      password_confirmation: 'any_password',
+    });
+
+    await createUser.execute({
+      name: 'other_name',
+      cpf: 'other_cpf',
+      email: 'other_email@mail.com',
+      password: 'other_password',
+      password_confirmation: 'other_password',
+    });
+
+    await expect(
+      updateUser.execute({
+        id: user.id,
+        email: 'other_email@mail.com',
       }),
     ).rejects.toBeInstanceOf(AppError);
   });

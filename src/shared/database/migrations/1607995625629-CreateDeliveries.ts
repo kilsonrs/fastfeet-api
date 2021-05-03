@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export default class CreateDeliveries1607085994541
+export default class CreateDeliveries1607995625629
   implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
@@ -17,62 +17,30 @@ export default class CreateDeliveries1607085994541
           {
             name: 'deliveryman_id',
             type: 'uuid',
-            isNullable: false,
           },
           {
-            name: 'recipient',
+            name: 'recipient_id',
+            type: 'uuid',
+          },
+          {
+            name: 'package_name',
             type: 'varchar',
-            isNullable: false,
           },
           {
-            name: 'product',
+            name: 'signature',
             type: 'varchar',
-            isNullable: false,
-          },
-          {
-            name: 'address',
-            type: 'varchar',
-            isNullable: false,
-          },
-          {
-            name: 'postal_code',
-            type: 'varchar',
-            isNullable: false,
-          },
-          {
-            name: 'neighborhood',
-            type: 'varchar',
-            isNullable: false,
-          },
-          {
-            name: 'city',
-            type: 'varchar',
-            isNullable: false,
-          },
-          {
-            name: 'state',
-            type: 'varchar',
-            isNullable: false,
-          },
-          {
-            name: 'canceled_at',
-            type: 'timestamp',
-            isNullable: true,
-          },
-          {
-            name: 'signature_id',
-            type: 'varchar',
-            isNullable: true,
           },
           {
             name: 'start_date',
             type: 'timestamp',
-            isNullable: true,
           },
           {
             name: 'end_date',
             type: 'timestamp',
-            isNullable: true,
+          },
+          {
+            name: 'canceled_at',
+            type: 'timestamp',
           },
           {
             name: 'created_at',
@@ -87,12 +55,20 @@ export default class CreateDeliveries1607085994541
         ],
         foreignKeys: [
           {
-            name: 'DeliveriesUser',
+            name: 'FKDeliverymanUser',
             referencedTableName: 'users',
             referencedColumnNames: ['id'],
             columnNames: ['deliveryman_id'],
-            onUpdate: 'SET NULL',
             onDelete: 'SET NULL',
+            onUpdate: 'SET NULL',
+          },
+          {
+            name: 'FKRecipient',
+            referencedTableName: 'recipients',
+            referencedColumnNames: ['id'],
+            columnNames: ['recipient_id'],
+            onDelete: 'SET NULL',
+            onUpdate: 'SET NULL',
           },
         ],
       }),
