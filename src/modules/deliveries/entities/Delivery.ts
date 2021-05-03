@@ -36,25 +36,10 @@ class Delivery {
   package_name: string;
 
   @Column()
-  address: string;
-
-  @Column()
-  postal_code: string;
-
-  @Column()
-  neighborhood: string;
-
-  @Column()
-  city: string;
-
-  @Column()
-  state: string;
+  signature: string;
 
   @Column('time with time zone')
   canceled_at: string;
-
-  @Column()
-  signature_id: string;
 
   @Column('timestamp without time zone')
   start_date: Date;
@@ -70,10 +55,10 @@ class Delivery {
 
   @Expose({ name: 'signature_url' })
   getSignatureUrl(): string | null {
-    if (!this.signature_id) {
+    if (!this.signature) {
       return null;
     }
-    return `${process.env.APP_API_URL}/files/${this.signature_id}`;
+    return `${process.env.APP_API_URL}/files/${this.signature}`;
   }
 
   constructor() {

@@ -1,24 +1,31 @@
+import { getRepository, Repository } from 'typeorm';
+
 import { IDeliveryDTO } from '../../dtos/IDeliveryDTO';
 import { Delivery } from '../../entities/Delivery';
 import { IDeliveryRepository } from '../IDeliveryRepository';
 
-class FakeDeliveryRepository implements IDeliveryRepository {
-  private deliveries: Delivery[] = [];
+class DeliveryRepository implements IDeliveryRepository {
+  private repository: Repository<Delivery>;
+
+  constructor() {
+    this.repository = getRepository(Delivery);
+  }
 
   async create({
     deliveryman_id,
     recipient_id,
     package_name,
   }: IDeliveryDTO): Promise<Delivery> {
-    const delivery = new Delivery();
-    Object.assign(delivery, {
+    const delivery = await this.repository.create({
       deliveryman_id,
       recipient_id,
       package_name,
     });
-    this.deliveries.push(delivery);
+
+    await this.repository.save(delivery);
+
     return delivery;
   }
 }
 
-export { FakeDeliveryRepository };
+export { DeliveryRepository };

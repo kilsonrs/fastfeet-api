@@ -11,6 +11,11 @@ class RecipientRepository implements IRecipientRepository {
     this.repository = getRepository(Recipient);
   }
 
+  async findById(id: string): Promise<Recipient> {
+    const recipient = await this.repository.findOne(id);
+    return recipient;
+  }
+
   async findByName(name: string): Promise<Recipient> {
     const recipient = await this.repository.findOne({
       where: {

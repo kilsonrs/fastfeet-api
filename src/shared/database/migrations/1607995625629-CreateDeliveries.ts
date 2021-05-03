@@ -29,18 +29,22 @@ export default class CreateDeliveries1607995625629
           {
             name: 'signature',
             type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'start_date',
             type: 'timestamp',
+            isNullable: true,
           },
           {
             name: 'end_date',
             type: 'timestamp',
+            isNullable: true,
           },
           {
             name: 'canceled_at',
             type: 'timestamp',
+            isNullable: true,
           },
           {
             name: 'created_at',

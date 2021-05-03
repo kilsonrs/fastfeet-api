@@ -4,6 +4,7 @@ import { Recipient } from '../entities/Recipient';
 interface IRecipientRepository {
   create(data: IRecipientDTO): Promise<Recipient>;
   findByName(name: string): Promise<Recipient>;
+  findById(id: string): Promise<Recipient>;
   list(): Promise<Recipient[]>;
 }
 

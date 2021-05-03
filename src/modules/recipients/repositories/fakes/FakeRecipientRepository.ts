@@ -5,6 +5,10 @@ import { IRecipientRepository } from '../IRecipientRepository';
 class FakeRecipientRepository implements IRecipientRepository {
   private recipients: Recipient[] = [];
 
+  async findById(id: string): Promise<Recipient> {
+    return this.recipients.find(recipient => recipient.id === id);
+  }
+
   async findByName(name: string): Promise<Recipient> {
     return this.recipients.find(recipient => recipient.name === name);
   }

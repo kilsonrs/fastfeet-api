@@ -117,8 +117,8 @@ Deve ser possível listar os destinatários
 
 
 **RN**
-Não deve ser possível cadastrar uma encomenda sem destinatário
-Não deve ser possível cadastrar uma encomenda sem entregador
+Não deve ser possível cadastrar uma encomenda com destinatário inexistente
+Não deve ser possível cadastrar uma encomenda com entregador inexistente
 Não deve ser possível cadastrar uma encomenda sem o nome do pacote
 
 
