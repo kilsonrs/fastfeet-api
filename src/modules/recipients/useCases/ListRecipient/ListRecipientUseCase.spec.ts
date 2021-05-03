@@ -1,16 +1,6 @@
-import { Recipient } from '../../entities/Recipient';
 import { FakeRecipientRepository } from '../../repositories/fakes/FakeRecipientRepository';
-import { IRecipientRepository } from '../../repositories/IRecipientRepository';
 import { CreateRecipientUseCase } from '../CreateRecipient/CreateRecipientUseCase';
-
-class ListRecipientUseCase {
-  constructor(private recipientRepository: IRecipientRepository) {}
-
-  async execute(): Promise<Recipient[]> {
-    const recipients = await this.recipientRepository.list();
-    return recipients;
-  }
-}
+import { ListRecipientUseCase } from './ListRecipientUseCase';
 
 let fakeRecipientRepository: FakeRecipientRepository;
 let createRecipientUseCase: CreateRecipientUseCase;
@@ -50,7 +40,6 @@ describe('CreateRecipient UseCase', () => {
 
     const recipientsList = await listRecipientUseCase.execute();
 
-    console.log(recipientsList);
     expect(recipientsList).toEqual([recipient1, recipient2]);
   });
 });
