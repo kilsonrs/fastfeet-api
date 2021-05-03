@@ -8,8 +8,10 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
+import { v4 as uuid } from 'uuid';
 
 import { User } from '../../accounts/entities/User';
+import { Recipient } from '../../recipients/entities/Recipient';
 
 @Entity('deliveries')
 class Delivery {
@@ -26,9 +28,9 @@ class Delivery {
   @Column()
   recipient_id: string;
 
-  // @ManyToOne(() => Recipient)
-  // @JoinColumn({name: 'recipient_id'})
-  // recipient: Recipient;
+  @ManyToOne(() => Recipient)
+  @JoinColumn({ name: 'recipient_id' })
+  recipient: Recipient;
 
   @Column()
   product: string;
@@ -72,6 +74,12 @@ class Delivery {
       return null;
     }
     return `${process.env.APP_API_URL}/files/${this.signature_id}`;
+  }
+
+  constructor() {
+    if (!this.id) {
+      this.id = uuid();
+    }
   }
 }
 
