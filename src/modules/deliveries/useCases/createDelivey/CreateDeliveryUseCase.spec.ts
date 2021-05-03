@@ -1,4 +1,3 @@
-/* eslint-disable max-classes-per-file */
 import { AppError } from '../../../../shared/errors/AppError';
 import { FakeDeliveryRepository } from '../../repositories/fakes/FakeDeliveryRepository';
 import { CreateDeliveryUseCase } from './CreateDeliveryUseCase';

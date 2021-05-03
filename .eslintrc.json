@@ -21,6 +21,7 @@
     "prettier"
   ],
   "rules": {
+    "max-classes-per-file": "off",
     "import/prefer-default-export": "off",
     "prettier/prettier": "error",
     "no-console": "off",
