@@ -11,6 +11,11 @@ class RecipientRepository implements IRecipientRepository {
     this.repository = getRepository(Recipient);
   }
 
+  async list(): Promise<Recipient[]> {
+    const recipients = await this.repository.find();
+    return recipients;
+  }
+
   async create({
     name,
     street_name,

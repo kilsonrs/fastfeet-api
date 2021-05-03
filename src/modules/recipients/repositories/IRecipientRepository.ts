@@ -3,6 +3,7 @@ import { Recipient } from '../entities/Recipient';
 
 interface IRecipientRepository {
   create(data: IRecipientDTO): Promise<Recipient>;
+  list(): Promise<Recipient[]>;
 }
 
 export { IRecipientRepository };
