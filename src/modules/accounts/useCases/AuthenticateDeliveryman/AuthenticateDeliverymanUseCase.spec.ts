@@ -20,7 +20,7 @@ describe('AuthenticatedDeliveryman', () => {
     );
   });
 
-  it('Should be able to Authenticate', async () => {
+  it('Should be able to Authenticate Deliveryman User', async () => {
     const user = await createUser.execute({
       name: 'any_name',
       cpf: 'any_cpf',
@@ -28,12 +28,19 @@ describe('AuthenticatedDeliveryman', () => {
       password: 'any_password',
       password_confirmation: 'any_password',
     });
+
     const response = await authenticateUser.execute({
       cpf: 'any_cpf',
       password: 'any_password',
     });
+
     expect(response).toHaveProperty('token');
-    expect(response.user).toEqual(user);
+
+    expect(response.user).toEqual({
+      name: user.name,
+      email: user.email,
+      is_deliveryman: true,
+    });
   });
 
   it('Should not be able to Authenticate with non existing user', async () => {
@@ -54,6 +61,7 @@ describe('AuthenticatedDeliveryman', () => {
       password: 'any_password',
       password_confirmation: 'any_password',
     });
+
     await expect(
       authenticateUser.execute({
         cpf: 'any_cpf',
@@ -71,6 +79,7 @@ describe('AuthenticatedDeliveryman', () => {
       password: 'any_password',
       password_confirmation: 'any_password',
     });
+
     await expect(
       authenticateUser.execute({
         cpf: 'any_cpf',

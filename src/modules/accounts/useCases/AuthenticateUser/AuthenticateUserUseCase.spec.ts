@@ -19,7 +19,8 @@ describe('AuthenticatedUser', () => {
       fakeHashProvider,
     );
   });
-  it('Should be able to Authenticate', async () => {
+
+  it('Should be able to Authenticate Admin User', async () => {
     const user = await createUser.execute({
       name: 'any_name',
       cpf: 'any_cpf',
@@ -28,13 +29,21 @@ describe('AuthenticatedUser', () => {
       password: 'any_password',
       password_confirmation: 'any_password',
     });
+
     const response = await authenticateUser.execute({
       email: 'any_email@mail.com',
       password: 'any_password',
     });
+
     expect(response).toHaveProperty('token');
-    expect(response.user).toEqual(user);
+
+    expect(response.user).toEqual({
+      name: user.name,
+      email: user.email,
+      is_deliveryman: false,
+    });
   });
+
   it('Should not be able to Authenticate with non existing user', async () => {
     await expect(
       authenticateUser.execute({
@@ -43,6 +52,7 @@ describe('AuthenticatedUser', () => {
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
+
   it('Should not be able to Authenticate with wrong password', async () => {
     await createUser.execute({
       name: 'any_name',
@@ -52,6 +62,7 @@ describe('AuthenticatedUser', () => {
       password: 'any_password',
       password_confirmation: 'any_password',
     });
+
     await expect(
       authenticateUser.execute({
         email: 'any_email@mail.com',
