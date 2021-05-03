@@ -5,7 +5,7 @@ import { Delivery } from '../../entities/Delivery';
 interface IDeliveryDTO {
   deliveryman_id: string;
   recipient_id: string;
-  product: string;
+  package_name: string;
   address: string;
   postal_code: string;
   neighborhood: string;
@@ -27,7 +27,7 @@ class FakeDeliveryRepository implements IDeliveryRepository {
   async create({
     deliveryman_id,
     recipient_id,
-    product,
+    package_name,
     address,
     postal_code,
     neighborhood,
@@ -38,7 +38,7 @@ class FakeDeliveryRepository implements IDeliveryRepository {
     Object.assign(delivery, {
       deliveryman_id,
       recipient_id,
-      product,
+      package_name,
       address,
       postal_code,
       neighborhood,
@@ -53,8 +53,35 @@ class FakeDeliveryRepository implements IDeliveryRepository {
 class CreateDeliveryUseCase {
   constructor(private deliveryRepository: IDeliveryRepository) {}
 
-  async execute(data: IDeliveryDTO): Promise<Delivery> {
-    const delivery = await this.deliveryRepository.create(data);
+  async execute({
+    deliveryman_id,
+    recipient_id,
+    package_name,
+    address,
+    postal_code,
+    neighborhood,
+    city,
+    state,
+  }: IDeliveryDTO): Promise<Delivery> {
+    if (!deliveryman_id) {
+      throw new AppError('Deliveryman must be provided');
+    }
+    if (!recipient_id) {
+      throw new AppError('Recipient must be provided');
+    }
+    if (!package_name) {
+      throw new AppError('Package name must be provided');
+    }
+    const delivery = await this.deliveryRepository.create({
+      deliveryman_id,
+      recipient_id,
+      package_name,
+      address,
+      postal_code,
+      neighborhood,
+      city,
+      state,
+    });
     return delivery;
   }
 }
@@ -72,7 +99,7 @@ describe('Create Delivery', () => {
     const delivery = await createDeliveryUseCase.execute({
       deliveryman_id: 'any_id',
       recipient_id: 'any_id',
-      product: 'any_product',
+      package_name: 'any_package_name',
       address: 'any_address',
       postal_code: 'any_postal_code',
       neighborhood: 'any_neighborhood',
@@ -80,5 +107,20 @@ describe('Create Delivery', () => {
       state: 'any_state',
     });
     expect(delivery).toHaveProperty('id');
+  });
+
+  it('should not be able to create a delivey without deliveryman_id', async () => {
+    await expect(
+      createDeliveryUseCase.execute({
+        deliveryman_id: '',
+        recipient_id: 'any_id',
+        package_name: 'any_package_name',
+        address: 'any_address',
+        postal_code: 'any_postal_code',
+        neighborhood: 'any_neighborhood',
+        city: 'any_city',
+        state: 'any_state',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
   });
 });
