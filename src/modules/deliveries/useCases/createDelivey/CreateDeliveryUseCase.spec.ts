@@ -1,4 +1,5 @@
 /* eslint-disable max-classes-per-file */
+import { AppError } from '../../../../shared/errors/AppError';
 import { Delivery } from '../../entities/Delivery';
 
 interface IDeliveryDTO {
@@ -69,14 +70,14 @@ describe('Create Delivery', () => {
 
   it('should be able to create a delivey', async () => {
     const delivery = await createDeliveryUseCase.execute({
-      deliveryman_id: 'string',
-      recipient_id: 'string',
-      product: 'string',
-      address: 'string',
-      postal_code: 'string',
-      neighborhood: 'string',
-      city: 'string',
-      state: 'string',
+      deliveryman_id: 'any_id',
+      recipient_id: 'any_id',
+      product: 'any_product',
+      address: 'any_address',
+      postal_code: 'any_postal_code',
+      neighborhood: 'any_neighborhood',
+      city: 'any_city',
+      state: 'any_state',
     });
     expect(delivery).toHaveProperty('id');
   });
