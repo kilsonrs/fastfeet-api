@@ -90,6 +90,7 @@ Deve usar uma api para busca de endereços por CEP
 
 **RN**
 Não deve ser possível cadastrar um destinatário sem nome
+Não deve ser possível cadastrar um destinatário com nome já existente.
 Não deve ser possível cadastrar um destinatário sem endereço
 
 
