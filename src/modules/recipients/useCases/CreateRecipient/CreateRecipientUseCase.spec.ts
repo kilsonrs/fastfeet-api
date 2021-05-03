@@ -42,4 +42,30 @@ describe('CreateRecipient UseCase', () => {
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
+
+  it('should not be able create a recipient with recipient name already exists', async () => {
+    await createRecipientUseCase.execute({
+      name: 'same_name',
+      street_name: 'any_street_name',
+      street_number: 100,
+      neighborhood: 'any_neighborhood',
+      city: 'any_city',
+      state: 'any_state',
+      uf: 'any_uf',
+      postal_code: 'any_postal_code',
+    });
+
+    await expect(
+      createRecipientUseCase.execute({
+        name: 'same_name',
+        street_name: 'any_street_name',
+        street_number: 100,
+        neighborhood: 'any_neighborhood',
+        city: 'any_city',
+        state: 'any_state',
+        uf: 'any_uf',
+        postal_code: 'any_postal_code',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
 });

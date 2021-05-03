@@ -25,7 +25,12 @@ class CreateRecipientUseCase {
     if (!name) {
       throw new AppError('Recipient name must be provided');
     }
-
+    const recipientAlreadyExists = await this.recipientRepository.findByName(
+      name,
+    );
+    if (recipientAlreadyExists) {
+      throw new AppError('Recipient name already exists');
+    }
     const recipient = await this.recipientRepository.create({
       name,
       street_name,
