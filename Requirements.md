@@ -116,9 +116,6 @@ Deve ser possível listar os entregadores
 Deve ser possível listar os destinatários
 
 
-**RNF**
-
-
 **RN**
 Não deve ser possível cadastrar uma encomenda sem destinatário
 Não deve ser possível cadastrar uma encomenda sem entregador

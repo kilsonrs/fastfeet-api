@@ -33,7 +33,7 @@ class Delivery {
   recipient: Recipient;
 
   @Column()
-  product: string;
+  package_name: string;
 
   @Column()
   address: string;
