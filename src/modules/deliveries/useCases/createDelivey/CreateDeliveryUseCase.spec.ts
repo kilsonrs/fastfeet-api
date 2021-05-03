@@ -123,4 +123,19 @@ describe('Create Delivery', () => {
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
+
+  it('should not be able to create a delivey without recipient_id', async () => {
+    await expect(
+      createDeliveryUseCase.execute({
+        deliveryman_id: 'any_id',
+        recipient_id: '',
+        package_name: 'any_package_name',
+        address: 'any_address',
+        postal_code: 'any_postal_code',
+        neighborhood: 'any_neighborhood',
+        city: 'any_city',
+        state: 'any_state',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
 });
