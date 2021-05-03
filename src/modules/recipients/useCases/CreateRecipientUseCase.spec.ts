@@ -1,4 +1,5 @@
 /* eslint-disable max-classes-per-file */
+import { AppError } from '../../../shared/errors/AppError';
 import { Recipient } from '../entities/Recipient';
 
 interface IRecipientDTO {
@@ -58,6 +59,9 @@ class CreateRecipientUseCase {
     uf,
     postal_code,
   }: IRecipientDTO): Promise<Recipient> {
+    if (!name) {
+      throw new AppError('Recipient name must be provided');
+    }
     const recipient = await this.recipientRepository.create({
       name,
       street_name,
@@ -68,6 +72,7 @@ class CreateRecipientUseCase {
       uf,
       postal_code,
     });
+
     return recipient;
   }
 }
@@ -83,7 +88,7 @@ describe('CreateRecipient UseCase', () => {
     );
   });
 
-  it('should be able create recipient', async () => {
+  it('should be able create a recipient', async () => {
     const recipient = await createRecipientUseCase.execute({
       name: 'any_name',
       street_name: 'any_street_name',
@@ -96,5 +101,20 @@ describe('CreateRecipient UseCase', () => {
     });
 
     expect(recipient).toHaveProperty('id');
+  });
+
+  it('should not be able create a recipient without recipient name', async () => {
+    await expect(
+      createRecipientUseCase.execute({
+        name: '',
+        street_name: 'any_street_name',
+        street_number: 100,
+        neighborhood: 'any_neighborhood',
+        city: 'any_city',
+        state: 'any_state',
+        uf: 'any_uf',
+        postal_code: 'any_postal_code',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
   });
 });
