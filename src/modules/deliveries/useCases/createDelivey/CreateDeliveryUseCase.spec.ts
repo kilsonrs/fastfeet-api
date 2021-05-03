@@ -2,10 +2,7 @@
 import { AppError } from '../../../../shared/errors/AppError';
 import { IDeliveryDTO } from '../../dtos/IDeliveryDTO';
 import { Delivery } from '../../entities/Delivery';
-
-interface IDeliveryRepository {
-  create(data: IDeliveryDTO): Promise<Delivery>;
-}
+import { IDeliveryRepository } from '../../repositories/IDeliveryRepository';
 
 class FakeDeliveryRepository implements IDeliveryRepository {
   private deliveries: Delivery[] = [];
