@@ -1,17 +1,7 @@
 /* eslint-disable max-classes-per-file */
 import { AppError } from '../../../shared/errors/AppError';
+import { IRecipientDTO } from '../dtos/IRecipientDTO';
 import { Recipient } from '../entities/Recipient';
-
-interface IRecipientDTO {
-  name: string;
-  street_name: string;
-  street_number: number;
-  neighborhood: string;
-  city: string;
-  state: string;
-  uf: string;
-  postal_code: string;
-}
 
 interface IRecipientRepository {
   create(data: IRecipientDTO): Promise<Recipient>;
