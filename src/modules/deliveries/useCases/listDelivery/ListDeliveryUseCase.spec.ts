@@ -92,4 +92,62 @@ describe('ListDelivery UseCase', () => {
 
     expect(deliveries).toEqual([delivery1, delivery2]);
   });
+
+  it('should be able to deliveryman user to list only its own deliveries', async () => {
+    const deliveryman1 = await createUserUseCase.execute({
+      name: 'deliveryman1_name',
+      cpf: 'deliveryman1_cpf',
+      email: 'deliveryman1_email@mail.com',
+      password: 'deliveryman1_password',
+      password_confirmation: 'deliveryman1_password',
+    });
+
+    const deliveryman2 = await createUserUseCase.execute({
+      name: 'deliveryman2_name',
+      cpf: 'deliveryman2_cpf',
+      email: 'deliveryman2_email@mail.com',
+      password: 'deliveryman2_password',
+      password_confirmation: 'deliveryman2_password',
+    });
+
+    const recipient1 = await createRecipientUseCase.execute({
+      name: 'recipient1_name',
+      street_name: 'recipient1_street_name',
+      street_number: 100,
+      neighborhood: 'recipient1_neighborhood',
+      city: 'recipient1_city',
+      state: 'recipient1_state',
+      uf: 'recipient1_uf',
+      postal_code: 'recipient1_postal_code',
+    });
+
+    const recipient2 = await createRecipientUseCase.execute({
+      name: 'recipient2_name',
+      street_name: 'recipient2_street_name',
+      street_number: 100,
+      neighborhood: 'recipient2_neighborhood',
+      city: 'recipient2_city',
+      state: 'recipient2_state',
+      uf: 'recipient2_uf',
+      postal_code: 'recipient2_postal_code',
+    });
+
+    const delivery1 = await createDeliveryUseCase.execute({
+      deliveryman_id: deliveryman1.id,
+      recipient_id: recipient1.id,
+      package_name: 'delivery1_package_name',
+    });
+
+    await createDeliveryUseCase.execute({
+      deliveryman_id: deliveryman2.id,
+      recipient_id: recipient2.id,
+      package_name: 'delivery2_package_name',
+    });
+
+    const deliveries = await listDeliveryUseCase.execute({
+      user_id: deliveryman1.id,
+    });
+
+    expect(deliveries).toEqual([delivery1]);
+  });
 });
