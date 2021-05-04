@@ -32,7 +32,7 @@ usersRoutes.post(
       name: Joi.string().required(),
       cpf: Joi.extend(validator).document().cpf(),
       email: Joi.string().email().required(),
-      is_deliveryman: Joi.boolean().required(),
+      is_deliveryman: Joi.boolean(),
       password: Joi.string().required(),
       password_confirmation: Joi.string().valid(Joi.ref('password')),
     },
