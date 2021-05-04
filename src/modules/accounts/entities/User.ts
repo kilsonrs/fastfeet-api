@@ -5,8 +5,11 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
 import { v4 as uuid } from 'uuid';
+
+import { Delivery } from '../../deliveries/entities/Delivery';
 
 @Entity('users')
 class User {
@@ -28,6 +31,9 @@ class User {
 
   @Column()
   is_deliveryman: boolean;
+
+  @OneToMany(() => Delivery, delivery => delivery.recipient)
+  deliveries: Delivery[];
 
   @CreateDateColumn()
   created_at: Date;

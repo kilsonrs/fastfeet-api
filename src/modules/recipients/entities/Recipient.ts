@@ -2,10 +2,13 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { v4 as uuid } from 'uuid';
+
+import { Delivery } from '../../deliveries/entities/Delivery';
 
 @Entity('recipients')
 class Recipient {
@@ -14,6 +17,9 @@ class Recipient {
 
   @Column()
   name: string;
+
+  @OneToMany(() => Delivery, delivery => delivery.recipient)
+  deliveries: Delivery[];
 
   @Column()
   street_name: string;

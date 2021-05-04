@@ -1,14 +1,18 @@
 import { IDeliveryDTO } from '../../dtos/IDeliveryDTO';
+import { IFindAllInNeighborhoodFromDeliverymanDTO } from '../../dtos/IFindAllInNeighborhoodFromDeliverymanDTO';
 import { Delivery } from '../../entities/Delivery';
 import { IDeliveryRepository } from '../IDeliveryRepository';
 
 class FakeDeliveryRepository implements IDeliveryRepository {
   private deliveries: Delivery[] = [];
 
-  async findByDeliverymanId(user_id: string): Promise<Delivery[]> {
-    return this.deliveries.filter(
-      delivery => delivery.deliveryman_id === user_id,
+  async findAllInNeighborhoodFromDeliveryman({
+    deliveryman_id,
+  }: IFindAllInNeighborhoodFromDeliverymanDTO): Promise<Delivery[]> {
+    const deliveries = this.deliveries.filter(
+      delivery => delivery.deliveryman_id === deliveryman_id,
     );
+    return deliveries;
   }
 
   async list(): Promise<Delivery[]> {

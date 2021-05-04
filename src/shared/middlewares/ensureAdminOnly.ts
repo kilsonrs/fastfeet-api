@@ -11,9 +11,7 @@ async function ensureAdminOnly(
 ): Promise<void> {
   const getUsers = getRepository(User);
   const userId = request.user.id;
-  console.log(request.user);
   const user = await getUsers.findOne(userId);
-  console.log(user);
   if (!user) {
     throw new AppError('User not found.');
   }

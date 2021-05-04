@@ -57,6 +57,7 @@ class AuthenticateDeliverymanUseCase {
 
     const response = {
       user: {
+        id: user.id,
         name: user.name,
         email: user.email,
         is_deliveryman: user.is_deliveryman,

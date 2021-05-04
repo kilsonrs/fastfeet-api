@@ -1,6 +1,7 @@
 import { getRepository, Repository } from 'typeorm';
 
 import { IDeliveryDTO } from '../../dtos/IDeliveryDTO';
+import { IFindAllInNeighborhoodFromDeliverymanDTO } from '../../dtos/IFindAllInNeighborhoodFromDeliverymanDTO';
 import { Delivery } from '../../entities/Delivery';
 import { IDeliveryRepository } from '../IDeliveryRepository';
 
@@ -11,9 +12,21 @@ class DeliveryRepository implements IDeliveryRepository {
     this.repository = getRepository(Delivery);
   }
 
-  async findByDeliverymanId(user_id: string): Promise<Delivery[]> {
+  async findAllInNeighborhoodFromDeliveryman({
+    deliveryman_id,
+    neighborhood,
+  }: IFindAllInNeighborhoodFromDeliverymanDTO): Promise<Delivery[]> {
+    const filterByNeighborhoodIfProvided = {
+      neighborhood: `%${neighborhood || ''}%`,
+    };
+
     const deliveries = await this.repository.find({
-      where: { deliveryman_id: user_id },
+      where: qb => {
+        qb.where({ deliveryman_id }).andWhere(
+          'Delivery_recipient.neighborhood like :neighborhood',
+          filterByNeighborhoodIfProvided,
+        );
+      },
     });
     return deliveries;
   }

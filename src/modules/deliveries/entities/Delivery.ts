@@ -21,14 +21,18 @@ class Delivery {
   @Column()
   deliveryman_id: string;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, user => user.deliveries, {
+    eager: true,
+  })
   @JoinColumn({ name: 'deliveryman_id' })
   deliveryman: User;
 
   @Column()
   recipient_id: string;
 
-  @ManyToOne(() => Recipient)
+  @ManyToOne(() => Recipient, recipient => recipient.deliveries, {
+    eager: true,
+  })
   @JoinColumn({ name: 'recipient_id' })
   recipient: Recipient;
 
