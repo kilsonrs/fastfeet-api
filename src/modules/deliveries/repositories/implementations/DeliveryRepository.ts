@@ -11,6 +11,18 @@ class DeliveryRepository implements IDeliveryRepository {
     this.repository = getRepository(Delivery);
   }
 
+  async findByDeliverymanId(user_id: string): Promise<Delivery[]> {
+    const deliveries = await this.repository.find({
+      where: { deliveryman_id: user_id },
+    });
+    return deliveries;
+  }
+
+  async list(): Promise<Delivery[]> {
+    const deliveries = await this.repository.find();
+    return deliveries;
+  }
+
   async create({
     deliveryman_id,
     recipient_id,
