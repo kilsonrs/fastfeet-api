@@ -128,9 +128,7 @@ Não deve ser possível cadastrar uma encomenda sem o nome do pacote
 
 **RF**
 Deve ser possível o administrador listar todas as encomendas.
-Deve ser possível o entregador listar as encomendas que ainda não foram retiradas.
-Deve ser possível o entregador listar as encomendas pendentes que foram retiradas por ele.
-Deve ser possível o entregador listar as encomendas que foram entregues por ele
+Deve ser possível o entregador listar apenas as encomendas que foram atribuidas a ele.
 Deve ser possível o entregador listar as encomendas filtrando por bairro
 
 
